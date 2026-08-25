@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0d0f13">
-
   <title>Yorune — Login</title>
 
   <style>
@@ -16,7 +15,6 @@
       --text: #f5f5f7;
       --muted: #969daa;
       --accent: #b889ff;
-      --danger: #ff6978;
     }
 
     * {
@@ -30,11 +28,9 @@
       background: var(--bg);
       color: var(--text);
       font-family: Arial, Helvetica, sans-serif;
-
       display: flex;
       justify-content: center;
       align-items: center;
-
       padding: 20px;
     }
 
@@ -72,23 +68,18 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 6px;
-
       padding: 5px;
       background: var(--surface2);
       border-radius: 10px;
-
       margin-bottom: 23px;
     }
 
     .tab {
       border: 0;
       border-radius: 7px;
-
       padding: 10px;
-
       background: transparent;
       color: var(--muted);
-
       font-weight: 700;
       cursor: pointer;
     }
@@ -115,7 +106,6 @@
       color: var(--muted);
       font-size: 12px;
       line-height: 1.5;
-
       margin-bottom: 20px;
     }
 
@@ -125,1593 +115,23 @@
 
     .field label {
       display: block;
-
       font-size: 12px;
       color: #c8cbd2;
-
       margin-bottom: 7px;
     }
 
     .field input {
       width: 100%;
       height: 46px;
-
       border-radius: 10px;
       border: 1px solid var(--border);
       outline: none;
-
       background: var(--surface2);
       color: white;
-
       padding: 0 13px;
-
       font-size: 14px;
     }
 
-    .field input::placeholder {
-      color: #707680;
-    }
-
-    .field input:focus {
-      border-color: var(--accent);
-    }
-
-    .submit {
-      width: 100%;
-      height: 46px;
-
-      border: 0;
-      border-radius: 10px;
-
-      background: var(--accent);
-      color: #17121f;
-
-      font-weight: 800;
-
-      margin-top: 5px;
-
-      cursor: pointer;
-    }
-
-    .submit:disabled {
-      opacity: .6;
-      cursor: wait;
-    }
-
-    .message {
-      display: none;
-
-      padding: 10px;
-
-      border-radius: 8px;
-
-      font-size: 12px;
-      line-height: 1.4;
-
-      margin-bottom: 13px;
-    }
-
-    .message.error {
-      display: block;
-
-      background: rgba(255,105,120,.12);
-      color: #ff9ba6;
-    }
-
-    .message.success {
-      display: block;
-
-      background: rgba(184,137,255,.12);
-      color: #d5baff;
-    }
-
-    .guest {
-      display: block;
-
-      width: 100%;
-
-      margin-top: 15px;
-
-      text-align: center;
-
-      color: var(--muted);
-      text-decoration: none;
-
-      font-size: 12px;
-    }
-
-    .guest:hover {
-      color: white;
-    }
-
-    .notice {
-      text-align: center;
-
-      color: #707680;
-
-      font-size: 10px;
-      line-height: 1.5;
-
-      margin-top: 18px;
-    }
-  </style>
-</head>
-
-<body>
-
-  <div class="container">
-
-    <div class="logo">
-      Yorune<span>.</span>
-    </div>
-
-    <div class="subtitle">
-      Temukan cerita baru.
-    </div>
-
-
-    <div class="card">
-
-      <!-- TABS -->
-
-      <div class="tabs">
-
-        <button
-          id="loginTab"
-          class="tab active"
-          type="button"
-          onclick="showForm('login')">
-
-          Login
-
-        </button>
-
-
-        <button
-          id="registerTab"
-          class="tab"
-          type="button"
-          onclick="showForm('register')">
-
-          Register
-
-        </button>
-
-      </div>
-
-
-      <!-- ========================= -->
-      <!-- LOGIN -->
-      <!-- ========================= -->
-
-      <form
-        id="loginForm"
-        class="form active"
-        onsubmit="login(event)">
-
-        <h1>
-          Selamat datang
-        </h1>
-
-        <p>
-          Login untuk mengakses akun Yorune kamu.
-        </p>
-
-
-        <div
-          id="loginMessage"
-          class="message">
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Email
-          </label>
-
-          <input
-            id="loginEmail"
-            type="email"
-            placeholder="nama@email.com"
-            autocomplete="email"
-            required>
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Password
-          </label>
-
-          <input
-            id="loginPassword"
-            type="password"
-            placeholder="Masukkan password"
-            autocomplete="current-password"
-            required>
-
-        </div>
-
-
-        <button
-          id="loginButton"
-          class="submit"
-          type="submit">
-
-          Login
-
-        </button>
-
-      </form>
-
-
-      <!-- ========================= -->
-      <!-- REGISTER -->
-      <!-- ========================= -->
-
-      <form
-        id="registerForm"
-        class="form"
-        onsubmit="register(event)">
-
-        <h1>
-          Buat akun
-        </h1>
-
-        <p>
-          Buat akun Yorune untuk menyimpan
-          data tontonanmu.
-        </p>
-
-
-        <div
-          id="registerMessage"
-          class="message">
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Username
-          </label>
-
-          <input
-            id="registerUsername"
-            type="text"
-            placeholder="Buat username"
-            autocomplete="username"
-            minlength="3"
-            maxlength="30"
-            required>
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Email
-          </label>
-
-          <input
-            id="registerEmail"
-            type="email"
-            placeholder="nama@email.com"
-            autocomplete="email"
-            required>
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Password
-          </label>
-
-          <input
-            id="registerPassword"
-            type="password"
-            placeholder="Minimal 8 karakter"
-            autocomplete="new-password"
-            minlength="8"
-            required>
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Konfirmasi Password
-          </label>
-
-          <input
-            id="registerConfirm"
-            type="password"
-            placeholder="Ulangi password"
-            autocomplete="new-password"
-            minlength="8"
-            required>
-
-        </div>
-
-
-        <button
-          id="registerButton"
-          class="submit"
-          type="submit">
-
-          Buat Akun
-
-        </button>
-
-      </form>
-
-
-      <!-- GUEST -->
-
-      <a
-        class="guest"
-        href="index.html">
-
-        Lanjut sebagai Guest
-
-      </a>
-
-    </div>
-
-
-    <div class="notice">
-      Akun Yorune menggunakan Supabase Auth.
-      Password diproses oleh sistem autentikasi Supabase.
-    </div>
-
-  </div>
-
-
-  <!-- ================================= -->
-  <!-- SUPABASE -->
-  <!-- ================================= -->
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
-  <script>
-
-    /* ==============================
-       SUPABASE CONFIG
-       ============================== */
-
-    const SUPABASE_URL =
-      "https://tggpvzgoxcumxvjnweem.supabase.co";
-
-    const SUPABASE_KEY =
-      "sb_publishable_sarbxo2XsnvwztX3nA81iA_6dXF-X3n";
-
-
-    const supabaseClient =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-      );
-
-
-    /* ==============================
-       GANTI LOGIN / REGISTER
-       ============================== */
-
-    function showForm(type) {
-
-      const loginForm =
-        document.getElementById("loginForm");
-
-      const registerForm =
-        document.getElementById("registerForm");
-
-      const loginTab =
-        document.getElementById("loginTab");
-
-      const registerTab =
-        document.getElementById("registerTab");
-
-
-      loginForm.classList.remove("active");
-      registerForm.classList.remove("active");
-
-      loginTab.classList.remove("active");
-      registerTab.classList.remove("active");
-
-
-      if (type === "login") {
-
-        loginForm.classList.add("active");
-        loginTab.classList.add("active");
-
-      } else {
-
-        registerForm.classList.add("active");
-        registerTab.classList.add("active");
-
-      }
-
-    }
-
-
-    /* ==============================
-       MESSAGE
-       ============================== */
-
-    function showMessage(id, text, type) {
-
-      const element =
-        document.getElementById(id);
-
-      element.textContent = text;
-
-      element.className =
-        "message " + type;
-
-    }
-
-
-    /* ==============================
-       REGISTER
-       ============================== */
-
-    async function register(event) {
-
-      event.preventDefault();
-
-
-      const button =
-        document.getElementById("registerButton");
-
-
-      const username =
-        document
-          .getElementById("registerUsername")
-          .value
-          .trim();
-
-
-      const email =
-        document
-          .getElementById("registerEmail")
-          .value
-          .trim();
-
-
-      const password =
-        document
-          .getElementById("registerPassword")
-          .value;
-
-
-      const confirm =
-        document
-          .getElementById("registerConfirm")
-          .value;
-
-
-      /* VALIDASI USERNAME */
-
-      if (username.length < 3) {
-
-        showMessage(
-          "registerMessage",
-          "Username minimal 3 karakter.",
-          "error"
-        );
-
-        return;
-      }
-
-
-      /* VALIDASI PASSWORD */
-
-      if (password.length < 8) {
-
-        showMessage(
-          "registerMessage",
-          "Password minimal 8 karakter.",
-          "error"
-        );
-
-        return;
-      }
-
-
-      /* CEK PASSWORD */
-
-      if (password !== confirm) {
-
-        showMessage(
-          "registerMessage",
-          "Konfirmasi password tidak sama.",
-          "error"
-        );
-
-        return;
-      }
-
-
-      button.disabled = true;
-
-      button.textContent =
-        "Membuat akun...";
-
-
-      try {
-
-        const {
-          data,
-          error
-        } =
-          await supabaseClient.auth.signUp({
-
-            email: email,
-
-            password: password,
-
-            options: {
-
-              data: {
-                username: username
-              }
-
-            }
-
-          });
-
-
-        if (error) {
-          throw error;
-        }
-
-
-        /* EMAIL CONFIRMATION AKTIF */
-
-        if (
-          data.user &&
-          !data.session
-        ) {
-
-          showMessage(
-            "registerMessage",
-            "Akun berhasil dibuat! Cek email kamu untuk verifikasi.",
-            "success"
-          );
-
-
-          document
-            .getElementById("registerForm")
-            .reset();
-
-
-          button.disabled = false;
-
-          button.textContent =
-            "Buat Akun";
-
-          return;
-        }
-
-
-        /* REGISTER LANGSUNG BERHASIL */
-
-        showMessage(
-          "registerMessage",
-          "Akun berhasil dibuat! Mengalihkan...",
-          "success"
-        );
-
-
-        setTimeout(() => {
-
-          window.location.href =
-            "index.html";
-
-        }, 1000);
-
-
-      } catch (error) {
-
-        console.error(
-          "Register error:",
-          error
-        );
-
-
-        showMessage(
-          "registerMessage",
-          getErrorMessage(error),
-          "error"
-        );
-
-      }
-
-
-      button.disabled = false;
-
-      button.textContent =
-        "Buat Akun";
-
-    }
-
-
-    /* ==============================
-       LOGIN
-       ============================== */
-
-    async function login(event) {
-
-      event.preventDefault();
-
-
-      const button =
-        document.getElementById("loginButton");
-
-
-      const email =
-        document
-          .getElementById("loginEmail")
-          .value
-          .trim();
-
-
-      const password =
-        document
-          .getElementById("loginPassword")
-          .value;
-
-
-      button.disabled = true;
-
-      button.textContent =
-        "Login...";
-
-
-      try {
-
-        const {
-          data,
-          error
-        } =
-          await supabaseClient.auth.signInWithPassword({
-
-            email: email,
-
-            password: password
-
-          });
-
-
-        if (error) {
-          throw error;
-        }
-
-
-        showMessage(
-          "loginMessage",
-          "Login berhasil! Membuka Yorune...",
-          "success"
-        );
-
-
-        setTimeout(() => {
-
-          window.location.href =
-            "index.html";
-
-        }, 700);
-
-
-      } catch (error) {
-
-        console.error(
-          "Login error:",
-          error
-        );
-
-
-        showMessage(
-          "loginMessage",
-          getErrorMessage(error),
-          "error"
-        );
-
-      }
-
-
-      button.disabled = false;
-
-      button.textContent =
-        "Login";
-
-    }
-
-
-    /* ==============================
-       ERROR MESSAGE
-       ============================== */
-
-    function getErrorMessage(error) {
-
-      const message =
-        error?.message || "";
-
-
-      const lower =
-        message.toLowerCase();
-
-
-      if (
-        lower.includes(
-          "invalid login credentials"
-        )
-      ) {
-
-        return "Email atau password salah.";
-
-      }
-
-
-      if (
-        lower.includes(
-          "email not confirmed"
-        )
-      ) {
-
-        return "Email belum diverifikasi. Cek inbox email kamu.";
-
-      }
-
-
-      if (
-        lower.includes(
-          "user already registered"
-        )
-      ) {
-
-        return "Email tersebut sudah terdaftar.";
-
-      }
-
-
-      if (
-        lower.includes(
-          "password should be at least"
-        )
-      ) {
-
-        return "Password terlalu pendek.";
-
-      }
-
-
-      if (
-        lower.includes(
-          "rate limit"
-        )
-      ) {
-
-        return "Terlalu banyak percobaan. Coba lagi nanti.";
-
-      }
-
-
-      return message ||
-        "Terjadi kesalahan. Coba lagi.";
-
-    }
-
-
-    /* ==============================
-       CEK SESSION
-       ============================== */
-
-    async function checkSession() {
-
-      try {
-
-        const {
-          data
-        } =
-          await supabaseClient.auth.getSession();
-
-
-        if (data.session) {
-
-          window.location.href =
-            "index.html";
-
-        }
-
-      } catch (error) {
-
-        console.error(
-          "Session error:",
-          error
-        );
-
-      }
-
-    }
-
-
-    checkSession();
-
-  </script>
-
-</body>
-</html>
-.container{
-  width:100%;
-  max-width:390px;
-}
-
-.logo{
-  text-align:center;
-  font-size:32px;
-  font-weight:800;
-  margin-bottom:8px;
-}
-
-.logo span{
-  color:var(--accent);
-}
-
-.subtitle{
-  text-align:center;
-  color:var(--muted);
-  font-size:13px;
-  margin-bottom:28px;
-}
-
-.card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:22px;
-}
-
-.tabs{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:6px;
-  padding:5px;
-  background:var(--surface2);
-  border-radius:10px;
-  margin-bottom:23px;
-}
-
-.tab{
-  border:0;
-  border-radius:7px;
-  padding:10px;
-  background:transparent;
-  color:var(--muted);
-  font-weight:700;
-  cursor:pointer;
-}
-
-.tab.active{
-  background:var(--accent);
-  color:#17121f;
-}
-
-.form{
-  display:none;
-}
-
-.form.active{
-  display:block;
-}
-
-.form h1{
-  font-size:21px;
-  margin-bottom:7px;
-}
-
-.form p{
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.5;
-  margin-bottom:20px;
-}
-
-.field{
-  margin-bottom:13px;
-}
-
-.field label{
-  display:block;
-  font-size:12px;
-  color:#c8cbd2;
-  margin-bottom:7px;
-}
-
-.field input{
-  width:100%;
-  height:46px;
-  border-radius:10px;
-  border:1px solid var(--border);
-  outline:none;
-  background:var(--surface2);
-  color:white;
-  padding:0 13px;
-}
-
-.field input:focus{
-  border-color:var(--accent);
-}
-
-.submit{
-  width:100%;
-  height:46px;
-  border:0;
-  border-radius:10px;
-  background:var(--accent);
-  color:#17121f;
-  font-weight:800;
-  margin-top:5px;
-  cursor:pointer;
-}
-
-.submit:disabled{
-  opacity:.6;
-  cursor:wait;
-}
-
-.message{
-  display:none;
-  padding:10px;
-  border-radius:8px;
-  font-size:12px;
-  line-height:1.4;
-  margin-bottom:13px;
-}
-
-.message.error{
-  display:block;
-  background:rgba(255,105,120,.12);
-  color:#ff9ba6;
-}
-
-.message.success{
-  display:block;
-  background:rgba(184,137,255,.12);
-  color:#d5baff;
-}
-
-.guest{
-  display:block;
-  width:100%;
-  margin-top:15px;
-  text-align:center;
-  color:var(--muted);
-  text-decoration:none;
-  font-size:12px;
-}
-
-.guest:hover{
-  color:white;
-}
-
-.notice{
-  text-align:center;
-  color:#707680;
-  font-size:10px;
-  line-height:1.5;
-  margin-top:18px;
-}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<div class="logo">
-  Yorune<span>.</span>
-</div>
-
-<div class="subtitle">
-  Temukan cerita baru.
-</div>
-
-<div class="card">
-
-<div class="tabs">
-
-<button
-  id="loginTab"
-  class="tab active"
-  type="button">
-  Login
-</button>
-
-<button
-  id="registerTab"
-  class="tab"
-  type="button">
-  Register
-</button>
-
-</div>
-
-
-<!-- LOGIN -->
-
-<form id="loginForm" class="form active">
-
-<h1>Selamat datang</h1>
-
-<p>
-Login untuk mengakses akun Yorune kamu.
-</p>
-
-<div id="loginMessage" class="message"></div>
-
-<div class="field">
-
-<label>Email</label>
-
-<input
-  id="loginEmail"
-  type="email"
-  placeholder="nama@email.com"
-  autocomplete="email"
-  required>
-
-</div>
-
-<div class="field">
-
-<label>Password</label>
-
-<input
-  id="loginPassword"
-  type="password"
-  placeholder="Masukkan password"
-  autocomplete="current-password"
-  required>
-
-</div>
-
-<button
-  id="loginButton"
-  class="submit"
-  type="submit">
-Login
-</button>
-
-</form>
-
-
-<!-- REGISTER -->
-
-<form id="registerForm" class="form">
-
-<h1>Buat akun</h1>
-
-<p>
-Buat akun Yorune untuk menyimpan data tontonanmu.
-</p>
-
-<div id="registerMessage" class="message"></div>
-
-<div class="field">
-
-<label>Username</label>
-
-<input
-  id="registerUsername"
-  type="text"
-  placeholder="Buat username"
-  minlength="3"
-  maxlength="30"
-  required>
-
-</div>
-
-<div class="field">
-
-<label>Email</label>
-
-<input
-  id="registerEmail"
-  type="email"
-  placeholder="nama@email.com"
-  required>
-
-</div>
-
-<div class="field">
-
-<label>Password</label>
-
-<input
-  id="registerPassword"
-  type="password"
-  placeholder="Minimal 8 karakter"
-  minlength="8"
-  required>
-
-</div>
-
-<div class="field">
-
-<label>Konfirmasi Password</label>
-
-<input
-  id="registerConfirm"
-  type="password"
-  placeholder="Ulangi password"
-  minlength="8"
-  required>
-
-</div>
-
-<button
-  id="registerButton"
-  class="submit"
-  type="submit">
-Buat Akun
-</button>
-
-</form>
-
-
-<a class="guest" href="index.html">
-Lanjut sebagai Guest
-</a>
-
-</div>
-
-<div class="notice">
-Akun Yorune menggunakan Supabase Auth.
-Password diproses oleh sistem autentikasi Supabase.
-</div>
-
-</div>
-
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-
-const SUPABASE_URL =
-"https://tggpvzgoxcumxvjnweem.supabase.co";
-
-const SUPABASE_KEY =
-"sb_publishable_sarbxo2XsnvwztX3nA81iA_6dXF-X3n";
-
-const supabaseClient =
-window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-
-
-/* =========================
-   TAB LOGIN / REGISTER
-========================= */
-
-const loginTab =
-document.getElementById("loginTab");
-
-const registerTab =
-document.getElementById("registerTab");
-
-const loginForm =
-document.getElementById("loginForm");
-
-const registerForm =
-document.getElementById("registerForm");
-
-
-loginTab.addEventListener("click", () => {
-
-  loginForm.classList.add("active");
-  registerForm.classList.remove("active");
-
-  loginTab.classList.add("active");
-  registerTab.classList.remove("active");
-
-});
-
-
-registerTab.addEventListener("click", () => {
-
-  registerForm.classList.add("active");
-  loginForm.classList.remove("active");
-
-  registerTab.classList.add("active");
-  loginTab.classList.remove("active");
-
-});
-
-
-/* =========================
-   MESSAGE
-========================= */
-
-function showMessage(id,text,type){
-
-  const el =
-  document.getElementById(id);
-
-  el.textContent = text;
-
-  el.className =
-  "message " + type;
-
-}
-
-
-/* =========================
-   REGISTER
-========================= */
-
-registerForm.addEventListener(
-"submit",
-async function(event){
-
-  event.preventDefault();
-
-  const button =
-  document.getElementById("registerButton");
-
-  const username =
-  document.getElementById("registerUsername")
-  .value.trim();
-
-  const email =
-  document.getElementById("registerEmail")
-  .value.trim();
-
-  const password =
-  document.getElementById("registerPassword")
-  .value;
-
-  const confirm =
-  document.getElementById("registerConfirm")
-  .value;
-
-
-  if(username.length < 3){
-
-    showMessage(
-      "registerMessage",
-      "Username minimal 3 karakter.",
-      "error"
-    );
-
-    return;
-  }
-
-
-  if(password.length < 8){
-
-    showMessage(
-      "registerMessage",
-      "Password minimal 8 karakter.",
-      "error"
-    );
-
-    return;
-  }
-
-
-  if(password !== confirm){
-
-    showMessage(
-      "registerMessage",
-      "Konfirmasi password tidak sama.",
-      "error"
-    );
-
-    return;
-  }
-
-
-  button.disabled = true;
-  button.textContent = "Membuat akun...";
-
-
-  try{
-
-    const {data,error} =
-    await supabaseClient.auth.signUp({
-
-      email:email,
-
-      password:password,
-
-      options:{
-        data:{
-          username:username
-        }
-      }
-
-    });
-
-
-    if(error) throw error;
-
-
-    if(data.session){
-
-      showMessage(
-        "registerMessage",
-        "Akun berhasil dibuat! Mengalihkan...",
-        "success"
-      );
-
-      setTimeout(() => {
-        window.location.href =
-        "index.html";
-      },1000);
-
-    }else{
-
-      showMessage(
-        "registerMessage",
-        "Akun berhasil dibuat. Cek email untuk verifikasi.",
-        "success"
-      );
-
-      registerForm.reset();
-
-    }
-
-  }catch(error){
-
-    console.error(error);
-
-    showMessage(
-      "registerMessage",
-      getErrorMessage(error),
-      "error"
-    );
-
-  }
-
-
-  button.disabled = false;
-  button.textContent = "Buat Akun";
-
-});
-
-
-/* =========================
-   LOGIN
-========================= */
-
-loginForm.addEventListener(
-"submit",
-async function(event){
-
-  event.preventDefault();
-
-  const button =
-  document.getElementById("loginButton");
-
-  const email =
-  document.getElementById("loginEmail")
-  .value.trim();
-
-  const password =
-  document.getElementById("loginPassword")
-  .value;
-
-
-  button.disabled = true;
-  button.textContent = "Login...";
-
-
-  try{
-
-    const {error} =
-    await supabaseClient.auth
-    .signInWithPassword({
-
-      email:email,
-      password:password
-
-    });
-
-
-    if(error) throw error;
-
-
-    showMessage(
-      "loginMessage",
-      "Login berhasil! Membuka Yorune...",
-      "success"
-    );
-
-
-    setTimeout(() => {
-
-      window.location.href =
-      "index.html";
-
-    },700);
-
-
-  }catch(error){
-
-    console.error(error);
-
-    showMessage(
-      "loginMessage",
-      getErrorMessage(error),
-      "error"
-    );
-
-  }
-
-
-  button.disabled = false;
-  button.textContent = "Login";
-
-});
-
-
-/* =========================
-   ERROR
-========================= */
-
-function getErrorMessage(error){
-
-  const message =
-  error?.message || "";
-
-  const lower =
-  message.toLowerCase();
-
-
-  if(lower.includes(
-    "invalid login credentials"
-  )){
-    return "Email atau password salah.";
-  }
-
-
-  if(lower.includes(
-    "email not confirmed"
-  )){
-    return "Email belum diverifikasi. Cek inbox email kamu.";
-  }
-
-
-  if(lower.includes(
-    "user already registered"
-  )){
-    return "Email tersebut sudah terdaftar.";
-  }
-
-
-  if(lower.includes(
-    "password should be at least"
-  )){
-    return "Password terlalu pendek.";
-  }
-
-
-  return message ||
-  "Terjadi kesalahan. Coba lagi.";
-
-}
-
-</script>
-
-</body>
-</html>
-    .container {
-      width: 100%;
-      max-width: 390px;
-    }
-
-    .logo {
-      text-align: center;
-      font-size: 32px;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .logo span {
-      color: var(--accent);
-    }
-
-    .subtitle {
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 28px;
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 22px;
-    }
-
-    .tabs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      padding: 5px;
-      background: var(--surface2);
-      border-radius: 10px;
-      margin-bottom: 23px;
-    }
-
-    .tab {
-      border: 0;
-      border-radius: 7px;
-      padding: 10px;
-      background: transparent;
-      color: var(--muted);
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .tab.active {
-      background: var(--accent);
-      color: #17121f;
-    }
-
-    .form {
-      display: none;
-    }
-
-    .form.active {
-      display: block;
-    }
-
-    .form h1 {
-      font-size: 21px;
-      margin-bottom: 7px;
-    }
-
-    .form p {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
-
-    .field {
-      margin-bottom: 13px;
-    }
-
-    .field label {
-      display: block;
-      font-size: 12px;
-      color: #c8cbd2;
-      margin-bottom: 7px;
-    }
-
-    .field input {
-      width: 100%;
-      height: 46px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      outline: none;
-      background: var(--surface2);
-      color: white;
-      padding: 0 13px;
-    }
-
     .field input:focus {
       border-color: var(--accent);
     }
@@ -1724,1572 +144,7 @@ function getErrorMessage(error){
       background: var(--accent);
       color: #17121f;
       font-weight: 800;
-      margin-top: 5px;
       cursor: pointer;
-    }
-
-    .submit:disabled {
-      opacity: .6;
-      cursor: wait;
-    }
-
-    .message {
-      display: none;
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 12px;
-      line-height: 1.4;
-      margin-bottom: 13px;
-    }
-
-    .message.error {
-      display: block;
-      background: rgba(255,105,120,.12);
-      color: #ff9ba6;
-    }
-
-    .message.success {
-      display: block;
-      background: rgba(184,137,255,.12);
-      color: #d5baff;
-    }
-
-    .guest {
-      display: block;
-      width: 100%;
-      margin-top: 15px;
-      text-align: center;
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 12px;
-    }
-
-    .guest:hover {
-      color: white;
-    }
-
-    .notice {
-      text-align: center;
-      color: #707680;
-      font-size: 10px;
-      line-height: 1.5;
-      margin-top: 18px;
-    }
-  </style>
-</head>
-
-<body>
-
-<div class="container">
-
-  <div class="logo">
-    Yorune<span>.</span>
-  </div>
-
-  <div class="subtitle">
-    Temukan cerita baru.
-  </div>
-
-  <div class="card">
-
-    <div class="tabs">
-
-      <button
-        id="loginTab"
-        class="tab active"
-        type="button"
-        onclick="showForm('login')">
-        Login
-      </button>
-
-      <button
-        id="registerTab"
-        class="tab"
-        type="button"
-        onclick="showForm('register')">
-        Register
-      </button>
-
-    </div>
-
-
-    <!-- LOGIN -->
-
-    <form
-      id="loginForm"
-      class="form active"
-      onsubmit="login(event)">
-
-      <h1>Selamat datang</h1>
-
-      <p>
-        Login untuk mengakses akun Yorune kamu.
-      </p>
-
-      <div
-        id="loginMessage"
-        class="message">
-      </div>
-
-      <div class="field">
-
-        <label>Email</label>
-
-        <input
-          id="loginEmail"
-          type="email"
-          placeholder="nama@email.com"
-          autocomplete="email"
-          required>
-
-      </div>
-
-      <div class="field">
-
-        <label>Password</label>
-
-        <input
-          id="loginPassword"
-          type="password"
-          placeholder="Masukkan password"
-          autocomplete="current-password"
-          required>
-
-      </div>
-
-      <button
-        id="loginButton"
-        class="submit"
-        type="submit">
-
-        Login
-
-      </button>
-
-    </form>
-
-
-    <!-- REGISTER -->
-
-    <form
-      id="registerForm"
-      class="form"
-      onsubmit="register(event)">
-
-      <h1>Buat akun</h1>
-
-      <p>
-        Buat akun Yorune untuk menyimpan data tontonanmu.
-      </p>
-
-      <div
-        id="registerMessage"
-        class="message">
-      </div>
-
-      <div class="field">
-
-        <label>Username</label>
-
-        <input
-          id="registerUsername"
-          type="text"
-          placeholder="Buat username"
-          autocomplete="username"
-          minlength="3"
-          maxlength="30"
-          required>
-
-      </div>
-
-      <div class="field">
-
-        <label>Email</label>
-
-        <input
-          id="registerEmail"
-          type="email"
-          placeholder="nama@email.com"
-          autocomplete="email"
-          required>
-
-      </div>
-
-      <div class="field">
-
-        <label>Password</label>
-
-        <input
-          id="registerPassword"
-          type="password"
-          placeholder="Minimal 8 karakter"
-          autocomplete="new-password"
-          minlength="8"
-          required>
-
-      </div>
-
-      <div class="field">
-
-        <label>Konfirmasi Password</label>
-
-        <input
-          id="registerConfirm"
-          type="password"
-          placeholder="Ulangi password"
-          autocomplete="new-password"
-          minlength="8"
-          required>
-
-      </div>
-
-      <button
-        id="registerButton"
-        class="submit"
-        type="submit">
-
-        Buat Akun
-
-      </button>
-
-    </form>
-
-
-    <a
-      class="guest"
-      href="index.html">
-
-      Lanjut sebagai Guest
-
-    </a>
-
-  </div>
-
-  <div class="notice">
-    Akun Yorune menggunakan Supabase Auth.
-    Password diproses oleh sistem autentikasi Supabase.
-  </div>
-
-</div>
-
-
-<!-- SUPABASE -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-
-  /* ==============================
-     SUPABASE
-     ============================== */
-
-  const SUPABASE_URL =
-    "https://tggpvzgoxcumxvjnweem.supabase.co";
-
-  const SUPABASE_KEY =
-    "sb_publishable_sarbxo2XsnvwztX3nA81iA_6dXF-X3n";
-
-
-  const supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
-
-
-  /* ==============================
-     GANTI FORM
-     ============================== */
-
-  function showForm(type) {
-
-    const loginForm =
-      document.getElementById("loginForm");
-
-    const registerForm =
-      document.getElementById("registerForm");
-
-    const loginTab =
-      document.getElementById("loginTab");
-
-    const registerTab =
-      document.getElementById("registerTab");
-
-
-    loginForm.classList.remove("active");
-    registerForm.classList.remove("active");
-
-    loginTab.classList.remove("active");
-    registerTab.classList.remove("active");
-
-
-    if (type === "login") {
-
-      loginForm.classList.add("active");
-      loginTab.classList.add("active");
-
-    } else {
-
-      registerForm.classList.add("active");
-      registerTab.classList.add("active");
-
-    }
-
-  }
-
-
-  /* ==============================
-     MESSAGE
-     ============================== */
-
-  function showMessage(id, text, type) {
-
-    const element =
-      document.getElementById(id);
-
-    element.textContent = text;
-
-    element.className =
-      "message " + type;
-
-  }
-
-
-  /* ==============================
-     REGISTER
-     ============================== */
-
-  async function register(event) {
-
-    event.preventDefault();
-
-    const button =
-      document.getElementById("registerButton");
-
-    const username =
-      document
-        .getElementById("registerUsername")
-        .value
-        .trim();
-
-    const email =
-      document
-        .getElementById("registerEmail")
-        .value
-        .trim();
-
-    const password =
-      document
-        .getElementById("registerPassword")
-        .value;
-
-    const confirm =
-      document
-        .getElementById("registerConfirm")
-        .value;
-
-
-    if (username.length < 3) {
-
-      showMessage(
-        "registerMessage",
-        "Username minimal 3 karakter.",
-        "error"
-      );
-
-      return;
-    }
-
-
-    if (password.length < 8) {
-
-      showMessage(
-        "registerMessage",
-        "Password minimal 8 karakter.",
-        "error"
-      );
-
-      return;
-    }
-
-
-    if (password !== confirm) {
-
-      showMessage(
-        "registerMessage",
-        "Konfirmasi password tidak sama.",
-        "error"
-      );
-
-      return;
-    }
-
-
-    button.disabled = true;
-    button.textContent = "Membuat akun...";
-
-
-    try {
-
-      const {
-        data,
-        error
-      } = await supabaseClient.auth.signUp({
-
-        email: email,
-
-        password: password,
-
-        options: {
-
-          data: {
-            username: username
-          }
-
-        }
-
-      });
-
-
-      if (error) {
-        throw error;
-      }
-
-
-      if (data.session) {
-
-        showMessage(
-          "registerMessage",
-          "Akun berhasil dibuat! Mengalihkan...",
-          "success"
-        );
-
-        setTimeout(() => {
-
-          window.location.href =
-            "index.html";
-
-        }, 1000);
-
-      } else {
-
-        showMessage(
-          "registerMessage",
-          "Akun berhasil dibuat. Cek email untuk verifikasi.",
-          "success"
-        );
-
-        document
-          .getElementById("registerForm")
-          .reset();
-
-      }
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      showMessage(
-        "registerMessage",
-        getErrorMessage(error),
-        "error"
-      );
-
-    }
-
-
-    button.disabled = false;
-    button.textContent = "Buat Akun";
-
-  }
-
-
-  /* ==============================
-     LOGIN
-     ============================== */
-
-  async function login(event) {
-
-    event.preventDefault();
-
-
-    const button =
-      document.getElementById("loginButton");
-
-    const email =
-      document
-        .getElementById("loginEmail")
-        .value
-        .trim();
-
-    const password =
-      document
-        .getElementById("loginPassword")
-        .value;
-
-
-    button.disabled = true;
-    button.textContent = "Login...";
-
-
-    try {
-
-      const {
-        data,
-        error
-      } =
-        await supabaseClient.auth.signInWithPassword({
-
-          email: email,
-
-          password: password
-
-        });
-
-
-      if (error) {
-        throw error;
-      }
-
-
-      showMessage(
-        "loginMessage",
-        "Login berhasil! Membuka Yorune...",
-        "success"
-      );
-
-
-      setTimeout(() => {
-
-        window.location.href =
-          "index.html";
-
-      }, 700);
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      showMessage(
-        "loginMessage",
-        getErrorMessage(error),
-        "error"
-      );
-
-    }
-
-
-    button.disabled = false;
-    button.textContent = "Login";
-
-  }
-
-
-  /* ==============================
-     ERROR
-     ============================== */
-
-  function getErrorMessage(error) {
-
-    const message =
-      error?.message || "";
-
-    const lower =
-      message.toLowerCase();
-
-
-    if (
-      lower.includes("invalid login credentials")
-    ) {
-
-      return "Email atau password salah.";
-
-    }
-
-
-    if (
-      lower.includes("email not confirmed")
-    ) {
-
-      return "Email belum diverifikasi. Cek inbox email kamu.";
-
-    }
-
-
-    if (
-      lower.includes("user already registered")
-    ) {
-
-      return "Email tersebut sudah terdaftar.";
-
-    }
-
-
-    if (
-      lower.includes("password should be at least")
-    ) {
-
-      return "Password terlalu pendek.";
-
-    }
-
-
-    return message ||
-      "Terjadi kesalahan. Coba lagi.";
-
-  }
-
-
-  /* ==============================
-     CEK SESSION
-     ============================== */
-
-  async function checkSession() {
-
-    const {
-      data: { session }
-    } =
-      await supabaseClient.auth.getSession();
-
-
-    if (session) {
-
-      window.location.href =
-        "index.html";
-
-    }
-
-  }
-
-
-  checkSession();
-
-</script>
-
-</body>
-</html>    }
-
-    .container {
-      width: 100%;
-      max-width: 390px;
-    }
-
-    .logo {
-      text-align: center;
-      font-size: 32px;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .logo span {
-      color: var(--accent);
-    }
-
-    .subtitle {
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 28px;
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 22px;
-    }
-
-    .tabs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      padding: 5px;
-      background: var(--surface2);
-      border-radius: 10px;
-      margin-bottom: 23px;
-    }
-
-    .tab {
-      border: 0;
-      border-radius: 7px;
-      padding: 10px;
-      background: transparent;
-      color: var(--muted);
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .tab.active {
-      background: var(--accent);
-      color: #17121f;
-    }
-
-    .form {
-      display: none;
-    }
-
-    .form.active {
-      display: block;
-    }
-
-    .form h1 {
-      font-size: 21px;
-      margin-bottom: 7px;
-    }
-
-    .form p {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
-
-    .field {
-      margin-bottom: 13px;
-    }
-
-    .field label {
-      display: block;
-      font-size: 12px;
-      color: #c8cbd2;
-      margin-bottom: 7px;
-    }
-
-    .field input {
-      width: 100%;
-      height: 46px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      outline: none;
-      background: var(--surface2);
-      color: white;
-      padding: 0 13px;
-    }
-
-    .field input:focus {
-      border-color: var(--accent);
-    }
-
-    .submit {
-      width: 100%;
-      height: 46px;
-      border: 0;
-      border-radius: 10px;
-      background: var(--accent);
-      color: #17121f;
-      font-weight: 800;
-      margin-top: 5px;
-      cursor: pointer;
-    }
-
-    .submit:disabled {
-      opacity: .6;
-      cursor: not-allowed;
-    }
-
-    .message {
-      display: none;
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 12px;
-      margin-bottom: 13px;
-      line-height: 1.4;
-    }
-
-    .message.error {
-      display: block;
-      background: rgba(255,105,120,.12);
-      color: #ff9ba6;
-    }
-
-    .message.success {
-      display: block;
-      background: rgba(184,137,255,.12);
-      color: #d5baff;
-    }
-
-    .guest {
-      display: block;
-      width: 100%;
-      margin-top: 15px;
-      text-align: center;
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 12px;
-    }
-
-    .guest:hover {
-      color: white;
-    }
-
-    .notice {
-      text-align: center;
-      color: #707680;
-      font-size: 10px;
-      line-height: 1.5;
-      margin-top: 18px;
-    }
-  </style>
-</head>
-
-<body>
-
-<div class="container">
-
-  <div class="logo">
-    Yorune<span>.</span>
-  </div>
-
-  <div class="subtitle">
-    Temukan cerita baru.
-  </div>
-
-  <div class="card">
-
-    <div class="tabs">
-
-      <button
-        id="loginTab"
-        class="tab active"
-        type="button"
-        onclick="showForm('login')">
-        Login
-      </button>
-
-      <button
-        id="registerTab"
-        class="tab"
-        type="button"
-        onclick="showForm('register')">
-        Register
-      </button>
-
-    </div>
-
-
-    <!-- ================= LOGIN ================= -->
-
-    <form
-      id="loginForm"
-      class="form active"
-      onsubmit="login(event)">
-
-      <h1>Selamat datang</h1>
-
-      <p>
-        Login untuk mengakses akun Yorune kamu.
-      </p>
-
-      <div id="loginMessage" class="message"></div>
-
-      <div class="field">
-
-        <label>Email</label>
-
-        <input
-          id="loginEmail"
-          type="email"
-          placeholder="nama@email.com"
-          autocomplete="email"
-          required>
-
-      </div>
-
-      <div class="field">
-
-        <label>Password</label>
-
-        <input
-          id="loginPassword"
-          type="password"
-          placeholder="Masukkan password"
-          autocomplete="current-password"
-          required>
-
-      </div>
-
-      <button
-        id="loginButton"
-        class="submit"
-        type="submit">
-
-        Login
-
-      </button>
-
-    </form>
-
-
-    <!-- ================= REGISTER ================= -->
-
-    <form
-      id="registerForm"
-      class="form"
-      onsubmit="register(event)">
-
-      <h1>Buat akun</h1>
-
-      <p>
-        Buat akun Yorune untuk menyimpan data tontonanmu.
-      </p>
-
-      <div id="registerMessage" class="message"></div>
-
-      <div class="field">
-
-        <label>Username</label>
-
-        <input
-          id="registerUsername"
-          type="text"
-          placeholder="Buat username"
-          autocomplete="username"
-          minlength="3"
-          maxlength="30"
-          required>
-
-      </div>
-
-      <div class="field">
-
-        <label>Email</label>
-
-        <input
-          id="registerEmail"
-          type="email"
-          placeholder="nama@email.com"
-          autocomplete="email"
-          required>
-
-      </div>
-
-      <div class="field">
-
-        <label>Password</label>
-
-        <input
-          id="registerPassword"
-          type="password"
-          placeholder="Minimal 8 karakter"
-          autocomplete="new-password"
-          minlength="8"
-          required>
-
-      </div>
-
-      <div class="field">
-
-        <label>Konfirmasi Password</label>
-
-        <input
-          id="registerConfirm"
-          type="password"
-          placeholder="Ulangi password"
-          autocomplete="new-password"
-          minlength="8"
-          required>
-
-      </div>
-
-      <button
-        id="registerButton"
-        class="submit"
-        type="submit">
-
-        Buat Akun
-
-      </button>
-
-    </form>
-
-
-    <a
-      class="guest"
-      href="index.html">
-
-      Lanjut sebagai Guest
-
-    </a>
-
-  </div>
-
-
-  <div class="notice">
-    Akun Yorune menggunakan Supabase Auth.
-    Password diproses oleh sistem autentikasi Supabase.
-  </div>
-
-</div>
-
-
-<!-- ================================================= -->
-<!-- SUPABASE -->
-<!-- ================================================= -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-
-  // ==========================================
-  // SUPABASE CONFIG
-  // ==========================================
-
-  const SUPABASE_URL =
-    "https://tggpvzgoxcumxvjnweem.supabase.co";
-
-  const SUPABASE_ANON_KEY =
-    "sb_publishable_sarbxo2XsnvwztX3nA81iA_6dXF-X3n";
-
-
-  const { createClient } =
-    supabase;
-
-  const db =
-    createClient(
-      SUPABASE_URL,
-      SUPABASE_ANON_KEY
-    );
-
-
-  // ==========================================
-  // GANTI FORM
-  // ==========================================
-
-  function showForm(type) {
-
-    const loginForm =
-      document.getElementById("loginForm");
-
-    const registerForm =
-      document.getElementById("registerForm");
-
-    const loginTab =
-      document.getElementById("loginTab");
-
-    const registerTab =
-      document.getElementById("registerTab");
-
-
-    loginForm.classList.remove("active");
-    registerForm.classList.remove("active");
-
-    loginTab.classList.remove("active");
-    registerTab.classList.remove("active");
-
-
-    if (type === "login") {
-
-      loginForm.classList.add("active");
-      loginTab.classList.add("active");
-
-    } else {
-
-      registerForm.classList.add("active");
-      registerTab.classList.add("active");
-
-    }
-
-  }
-
-
-  // ==========================================
-  // MESSAGE
-  // ==========================================
-
-  function showMessage(id, text, type) {
-
-    const element =
-      document.getElementById(id);
-
-    element.textContent = text;
-
-    element.className =
-      "message " + type;
-
-  }
-
-
-  // ==========================================
-  // REGISTER
-  // ==========================================
-
-  async function register(event) {
-
-    event.preventDefault();
-
-
-    const button =
-      document.getElementById("registerButton");
-
-    const username =
-      document
-        .getElementById("registerUsername")
-        .value
-        .trim();
-
-    const email =
-      document
-        .getElementById("registerEmail")
-        .value
-        .trim();
-
-    const password =
-      document
-        .getElementById("registerPassword")
-        .value;
-
-    const confirm =
-      document
-        .getElementById("registerConfirm")
-        .value;
-
-
-    if (username.length < 3) {
-
-      showMessage(
-        "registerMessage",
-        "Username minimal 3 karakter.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    if (password.length < 8) {
-
-      showMessage(
-        "registerMessage",
-        "Password minimal 8 karakter.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    if (password !== confirm) {
-
-      showMessage(
-        "registerMessage",
-        "Konfirmasi password tidak sama.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    button.disabled = true;
-    button.textContent = "Membuat akun...";
-
-
-    try {
-
-      const { data, error } =
-        await db.auth.signUp({
-
-          email: email,
-
-          password: password,
-
-          options: {
-
-            data: {
-              username: username
-            }
-
-          }
-
-        });
-
-
-      if (error) {
-        throw error;
-      }
-
-
-      /*
-        Profile akan dibuat otomatis
-        oleh trigger SQL:
-
-        handle_new_user()
-      */
-
-
-      if (data.session) {
-
-        showMessage(
-          "registerMessage",
-          "Akun berhasil dibuat! Mengalihkan...",
-          "success"
-        );
-
-
-        setTimeout(() => {
-
-          window.location.href =
-            "index.html";
-
-        }, 1000);
-
-
-      } else {
-
-        showMessage(
-          "registerMessage",
-          "Akun berhasil dibuat. Silakan cek email untuk verifikasi, lalu login.",
-          "success"
-        );
-
-        document
-          .getElementById("registerForm")
-          .reset();
-
-        setTimeout(() => {
-
-          showForm("login");
-
-        }, 1500);
-
-      }
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      showMessage(
-        "registerMessage",
-        getErrorMessage(error),
-        "error"
-      );
-
-    }
-
-
-    button.disabled = false;
-    button.textContent = "Buat Akun";
-
-  }
-
-
-  // ==========================================
-  // LOGIN
-  // ==========================================
-
-  async function login(event) {
-
-    event.preventDefault();
-
-
-    const button =
-      document.getElementById("loginButton");
-
-    const email =
-      document
-        .getElementById("loginEmail")
-        .value
-        .trim();
-
-    const password =
-      document
-        .getElementById("loginPassword")
-        .value;
-
-
-    if (!email || !password) {
-
-      showMessage(
-        "loginMessage",
-        "Email dan password wajib diisi.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    button.disabled = true;
-    button.textContent = "Login...";
-
-
-    try {
-
-      const { data, error } =
-        await db.auth.signInWithPassword({
-
-          email: email,
-
-          password: password
-
-        });
-
-
-      if (error) {
-        throw error;
-      }
-
-
-      showMessage(
-        "loginMessage",
-        "Login berhasil! Mengalihkan...",
-        "success"
-      );
-
-
-      setTimeout(() => {
-
-        window.location.href =
-          "index.html";
-
-      }, 700);
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      showMessage(
-        "loginMessage",
-        getErrorMessage(error),
-        "error"
-      );
-
-    }
-
-
-    button.disabled = false;
-    button.textContent = "Login";
-
-  }
-
-
-  // ==========================================
-  // ERROR MESSAGE
-  // ==========================================
-
-  function getErrorMessage(error) {
-
-    const message =
-      error?.message || "";
-
-
-    if (
-      message
-        .toLowerCase()
-        .includes("invalid login credentials")
-    ) {
-
-      return "Email atau password salah.";
-
-    }
-
-
-    if (
-      message
-        .toLowerCase()
-        .includes("email not confirmed")
-    ) {
-
-      return "Email belum diverifikasi. Cek inbox email kamu.";
-
-    }
-
-
-    if (
-      message
-        .toLowerCase()
-        .includes("user already registered")
-    ) {
-
-      return "Email tersebut sudah terdaftar.";
-
-    }
-
-
-    if (
-      message
-        .toLowerCase()
-        .includes("password should be at least")
-    ) {
-
-      return "Password terlalu pendek.";
-
-    }
-
-
-    return message ||
-      "Terjadi kesalahan. Coba lagi.";
-
-  }
-
-
-  // ==========================================
-  // CEK SESSION SAAT HALAMAN DIBUKA
-  // ==========================================
-
-  async function checkSession() {
-
-    const {
-      data: { session }
-    } = await db.auth.getSession();
-
-
-    if (session) {
-
-      /*
-        Kalau sudah login, langsung ke
-        halaman utama.
-      */
-
-      // window.location.href = "index.html";
-
-    }
-
-  }
-
-
-  checkSession();
-
-</script>
-
-</body>
-</html>
-      padding: 20px;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 390px;
-    }
-
-    .logo {
-      text-align: center;
-      font-size: 32px;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .logo span {
-      color: var(--accent);
-    }
-
-    .subtitle {
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 28px;
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 22px;
-    }
-
-    .tabs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-
-      padding: 5px;
-      background: var(--surface2);
-      border-radius: 10px;
-
-      margin-bottom: 23px;
-    }
-
-    .tab {
-      border: 0;
-      border-radius: 7px;
-
-      padding: 10px;
-
-      background: transparent;
-      color: var(--muted);
-
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .tab.active {
-      background: var(--accent);
-      color: #17121f;
-    }
-
-    .form {
-      display: none;
-    }
-
-    .form.active {
-      display: block;
-    }
-
-    .form h1 {
-      font-size: 21px;
-      margin-bottom: 7px;
-    }
-
-    .form p {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.5;
-
-      margin-bottom: 20px;
-    }
-
-    .field {
-      margin-bottom: 13px;
-    }
-
-    .field label {
-      display: block;
-
-      font-size: 12px;
-      color: #c8cbd2;
-
-      margin-bottom: 7px;
-    }
-
-    .field input {
-      width: 100%;
-      height: 46px;
-
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      outline: none;
-
-      background: var(--surface2);
-      color: white;
-
-      padding: 0 13px;
-    }
-
-    .field input:focus {
-      border-color: var(--accent);
-    }
-
-    .submit {
-      width: 100%;
-      height: 46px;
-
-      border: 0;
-      border-radius: 10px;
-
-      background: var(--accent);
-      color: #17121f;
-
-      font-weight: 800;
-      cursor: pointer;
-
       margin-top: 5px;
     }
 
@@ -3300,41 +155,32 @@ function getErrorMessage(error){
 
     .message {
       display: none;
-
       padding: 10px;
       border-radius: 8px;
-
       font-size: 12px;
       line-height: 1.4;
-
       margin-bottom: 13px;
     }
 
     .message.error {
       display: block;
-
       background: rgba(255,105,120,.12);
       color: #ff9ba6;
     }
 
     .message.success {
       display: block;
-
       background: rgba(184,137,255,.12);
       color: #d5baff;
     }
 
     .guest {
       display: block;
-
       width: 100%;
       margin-top: 15px;
-
       text-align: center;
-
       color: var(--muted);
       text-decoration: none;
-
       font-size: 12px;
     }
 
@@ -3344,12 +190,9 @@ function getErrorMessage(error){
 
     .notice {
       text-align: center;
-
       color: #707680;
-
       font-size: 10px;
       line-height: 1.5;
-
       margin-top: 18px;
     }
   </style>
@@ -3389,34 +232,24 @@ function getErrorMessage(error){
 
       </div>
 
-
-      <!-- ========================= -->
       <!-- LOGIN -->
-      <!-- ========================= -->
 
       <form
         id="loginForm"
         class="form active"
         onsubmit="login(event)">
 
-        <h1>
-          Selamat datang
-        </h1>
+        <h1>Selamat datang</h1>
 
         <p>
           Login untuk mengakses akun Yorune kamu.
         </p>
 
-        <div
-          id="loginMessage"
-          class="message">
-        </div>
+        <div id="loginMessage" class="message"></div>
 
         <div class="field">
 
-          <label>
-            Email
-          </label>
+          <label>Email</label>
 
           <input
             id="loginEmail"
@@ -3429,9 +262,7 @@ function getErrorMessage(error){
 
         <div class="field">
 
-          <label>
-            Password
-          </label>
+          <label>Password</label>
 
           <input
             id="loginPassword"
@@ -3446,42 +277,29 @@ function getErrorMessage(error){
           id="loginButton"
           class="submit"
           type="submit">
-
           Login
-
         </button>
 
       </form>
 
-
-      <!-- ========================= -->
       <!-- REGISTER -->
-      <!-- ========================= -->
 
       <form
         id="registerForm"
         class="form"
         onsubmit="register(event)">
 
-        <h1>
-          Buat akun
-        </h1>
+        <h1>Buat akun</h1>
 
         <p>
-          Buat akun Yorune untuk menyimpan
-          data tontonanmu.
+          Buat akun Yorune untuk menyimpan data tontonanmu.
         </p>
 
-        <div
-          id="registerMessage"
-          class="message">
-        </div>
+        <div id="registerMessage" class="message"></div>
 
         <div class="field">
 
-          <label>
-            Username
-          </label>
+          <label>Username</label>
 
           <input
             id="registerUsername"
@@ -3496,9 +314,7 @@ function getErrorMessage(error){
 
         <div class="field">
 
-          <label>
-            Email
-          </label>
+          <label>Email</label>
 
           <input
             id="registerEmail"
@@ -3511,9 +327,7 @@ function getErrorMessage(error){
 
         <div class="field">
 
-          <label>
-            Password
-          </label>
+          <label>Password</label>
 
           <input
             id="registerPassword"
@@ -3527,9 +341,7 @@ function getErrorMessage(error){
 
         <div class="field">
 
-          <label>
-            Konfirmasi Password
-          </label>
+          <label>Konfirmasi Password</label>
 
           <input
             id="registerConfirm"
@@ -3545,20 +357,15 @@ function getErrorMessage(error){
           id="registerButton"
           class="submit"
           type="submit">
-
           Buat Akun
-
         </button>
 
       </form>
 
-
       <a
         class="guest"
         href="index.html">
-
         Lanjut sebagai Guest
-
       </a>
 
     </div>
@@ -3570,35 +377,17 @@ function getErrorMessage(error){
 
   </div>
 
-
-  <!-- ========================================= -->
   <!-- SUPABASE -->
-  <!-- ========================================= -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
   <script>
-
-    /* ========================================
-       SUPABASE CONFIG
-       ======================================== */
 
     const SUPABASE_URL =
       "https://tggpvzgoxcumxvjnweem.supabase.co";
 
-    /*
-      Tempel PUBLISHABLE KEY / ANON KEY lu
-      di bawah ini.
-
-      JANGAN gunakan:
-      service_role
-      sb_secret_...
-    */
-
     const SUPABASE_KEY =
       "sb_publishable_sarbxo2XsnvwztX3nA81iA_6dXF-X3n";
-
 
     const supabaseClient =
       window.supabase.createClient(
@@ -3606,10 +395,6 @@ function getErrorMessage(error){
         SUPABASE_KEY
       );
 
-
-    /* ========================================
-       FORM SWITCH
-       ======================================== */
 
     function showForm(type) {
 
@@ -3625,13 +410,11 @@ function getErrorMessage(error){
       const registerTab =
         document.getElementById("registerTab");
 
-
       loginForm.classList.remove("active");
       registerForm.classList.remove("active");
 
       loginTab.classList.remove("active");
       registerTab.classList.remove("active");
-
 
       if (type === "login") {
 
@@ -3644,13 +427,8 @@ function getErrorMessage(error){
         registerTab.classList.add("active");
 
       }
-
     }
 
-
-    /* ========================================
-       MESSAGE
-       ======================================== */
 
     function showMessage(id, text, type) {
 
@@ -3658,21 +436,13 @@ function getErrorMessage(error){
         document.getElementById(id);
 
       element.textContent = text;
-
-      element.className =
-        "message " + type;
-
+      element.className = "message " + type;
     }
 
-
-    /* ========================================
-       REGISTER
-       ======================================== */
 
     async function register(event) {
 
       event.preventDefault();
-
 
       const button =
         document.getElementById("registerButton");
@@ -3740,96 +510,81 @@ function getErrorMessage(error){
       button.textContent = "Membuat akun...";
 
 
-      const {
-        data,
-        error
-      } = await supabaseClient.auth.signUp({
+      try {
 
-        email: email,
+        const {
+          data,
+          error
+        } =
+          await supabaseClient.auth.signUp({
 
-        password: password,
+            email: email,
 
-        options: {
+            password: password,
 
-          data: {
-            username: username
-          }
+            options: {
+              data: {
+                username: username
+              }
+            }
+
+          });
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        if (data.user && !data.session) {
+
+          showMessage(
+            "registerMessage",
+            "Akun berhasil dibuat! Cek email untuk verifikasi.",
+            "success"
+          );
+
+          document
+            .getElementById("registerForm")
+            .reset();
+
+        } else {
+
+          showMessage(
+            "registerMessage",
+            "Akun berhasil dibuat! Mengalihkan...",
+            "success"
+          );
+
+          setTimeout(() => {
+
+            window.location.href = "index.html";
+
+          }, 1000);
 
         }
 
-      });
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          "registerMessage",
+          getErrorMessage(error),
+          "error"
+        );
+
+      }
 
 
       button.disabled = false;
       button.textContent = "Buat Akun";
-
-
-      if (error) {
-
-        showMessage(
-          "registerMessage",
-          error.message,
-          "error"
-        );
-
-        return;
-      }
-
-
-      /*
-        Kalau email confirmation aktif,
-        user harus verifikasi email dulu.
-      */
-
-      if (
-        data.user &&
-        !data.session
-      ) {
-
-        showMessage(
-          "registerMessage",
-          "Akun berhasil dibuat! Cek email untuk verifikasi akun.",
-          "success"
-        );
-
-        document
-          .getElementById("registerForm")
-          .reset();
-
-        return;
-      }
-
-
-      showMessage(
-        "registerMessage",
-        "Akun berhasil dibuat! Mengalihkan...",
-        "success"
-      );
-
-
-      document
-        .getElementById("registerForm")
-        .reset();
-
-
-      setTimeout(() => {
-
-        window.location.href =
-          "index.html";
-
-      }, 1000);
-
     }
 
-
-    /* ========================================
-       LOGIN
-       ======================================== */
 
     async function login(event) {
 
       event.preventDefault();
-
 
       const button =
         document.getElementById("loginButton");
@@ -3850,55 +605,98 @@ function getErrorMessage(error){
       button.textContent = "Login...";
 
 
-      const {
-        data,
-        error
-      } =
-        await supabaseClient.auth.signInWithPassword({
+      try {
 
-          email: email,
+        const {
+          data,
+          error
+        } =
+          await supabaseClient.auth.signInWithPassword({
 
-          password: password
+            email: email,
+            password: password
 
-        });
+          });
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        showMessage(
+          "loginMessage",
+          "Login berhasil! Membuka Yorune...",
+          "success"
+        );
+
+
+        setTimeout(() => {
+
+          window.location.href = "index.html";
+
+        }, 700);
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          "loginMessage",
+          getErrorMessage(error),
+          "error"
+        );
+
+      }
 
 
       button.disabled = false;
       button.textContent = "Login";
-
-
-      if (error) {
-
-        showMessage(
-          "loginMessage",
-          "Email atau password salah.",
-          "error"
-        );
-
-        return;
-      }
-
-
-      showMessage(
-        "loginMessage",
-        "Login berhasil! Membuka Yorune...",
-        "success"
-      );
-
-
-      setTimeout(() => {
-
-        window.location.href =
-          "index.html";
-
-      }, 700);
-
     }
 
 
-    /* ========================================
-       CEK SESSION
-       ======================================== */
+    function getErrorMessage(error) {
+
+      const message =
+        error?.message || "";
+
+      const lower =
+        message.toLowerCase();
+
+
+      if (
+        lower.includes("invalid login credentials")
+      ) {
+        return "Email atau password salah.";
+      }
+
+
+      if (
+        lower.includes("email not confirmed")
+      ) {
+        return "Email belum diverifikasi. Cek inbox email kamu.";
+      }
+
+
+      if (
+        lower.includes("user already registered")
+      ) {
+        return "Email tersebut sudah terdaftar.";
+      }
+
+
+      if (
+        lower.includes("password should be at least")
+      ) {
+        return "Password terlalu pendek.";
+      }
+
+
+      return message ||
+        "Terjadi kesalahan. Coba lagi.";
+    }
+
 
     async function checkSession() {
 
@@ -3910,16 +708,10 @@ function getErrorMessage(error){
 
       if (data.session) {
 
-        /*
-          Kalau sudah login,
-          langsung ke halaman utama.
-        */
-
         window.location.href =
           "index.html";
 
       }
-
     }
 
 
@@ -3928,520 +720,4 @@ function getErrorMessage(error){
   </script>
 
 </body>
-</html>      max-width: 390px;
-    }
-
-    .logo {
-      text-align: center;
-      font-size: 32px;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .logo span {
-      color: var(--accent);
-    }
-
-    .subtitle {
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 28px;
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 22px;
-    }
-
-    .tabs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      padding: 5px;
-      background: var(--surface2);
-      border-radius: 10px;
-      margin-bottom: 23px;
-    }
-
-    .tab {
-      border: 0;
-      border-radius: 7px;
-      padding: 10px;
-      background: transparent;
-      color: var(--muted);
-      font-weight: 700;
-    }
-
-    .tab.active {
-      background: var(--accent);
-      color: #17121f;
-    }
-
-    .form {
-      display: none;
-    }
-
-    .form.active {
-      display: block;
-    }
-
-    .form h1 {
-      font-size: 21px;
-      margin-bottom: 7px;
-    }
-
-    .form p {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
-
-    .field {
-      margin-bottom: 13px;
-    }
-
-    .field label {
-      display: block;
-      font-size: 12px;
-      color: #c8cbd2;
-      margin-bottom: 7px;
-    }
-
-    .field input {
-      width: 100%;
-      height: 46px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      outline: none;
-      background: var(--surface2);
-      color: white;
-      padding: 0 13px;
-    }
-
-    .field input:focus {
-      border-color: var(--accent);
-    }
-
-    .submit {
-      width: 100%;
-      height: 46px;
-      border: 0;
-      border-radius: 10px;
-      background: var(--accent);
-      color: #17121f;
-      font-weight: 800;
-      margin-top: 5px;
-    }
-
-    .message {
-      display: none;
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 12px;
-      margin-bottom: 13px;
-      line-height: 1.4;
-    }
-
-    .message.error {
-      display: block;
-      background: rgba(255,105,120,.12);
-      color: #ff9ba6;
-    }
-
-    .message.success {
-      display: block;
-      background: rgba(184,137,255,.12);
-      color: #d5baff;
-    }
-
-    .guest {
-      display: block;
-      width: 100%;
-      margin-top: 15px;
-      text-align: center;
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 12px;
-    }
-
-    .guest:hover {
-      color: white;
-    }
-
-    .notice {
-      text-align: center;
-      color: #707680;
-      font-size: 10px;
-      line-height: 1.5;
-      margin-top: 18px;
-    }
-  </style></head><body>  <div class="container"><div class="logo">
-  Yorune<span>.</span>
-</div>
-
-<div class="subtitle">
-  Temukan cerita baru.
-</div>
-
-<div class="card">
-
-  <div class="tabs">
-
-    <button
-      id="loginTab"
-      class="tab active"
-      onclick="showForm('login')">
-      Login
-    </button>
-
-    <button
-      id="registerTab"
-      class="tab"
-      onclick="showForm('register')">
-      Register
-    </button>
-
-  </div>
-
-
-  <!-- LOGIN -->
-
-  <form
-    id="loginForm"
-    class="form active"
-    onsubmit="login(event)">
-
-    <h1>
-      Selamat datang
-    </h1>
-
-    <p>
-      Login untuk mengakses akun Yorune kamu.
-    </p>
-
-    <div
-      id="loginMessage"
-      class="message">
-    </div>
-
-    <div class="field">
-
-      <label>
-        Username / Email
-      </label>
-
-      <input
-        id="loginUsername"
-        type="text"
-        placeholder="Masukkan username"
-        autocomplete="username"
-        required>
-
-    </div>
-
-
-    <div class="field">
-
-      <label>
-        Password
-      </label>
-
-      <input
-        id="loginPassword"
-        type="password"
-        placeholder="Masukkan password"
-        autocomplete="current-password"
-        required>
-
-    </div>
-
-
-    <button
-      class="submit"
-      type="submit">
-      Login
-    </button>
-
-  </form>
-
-
-  <!-- REGISTER -->
-
-  <form
-    id="registerForm"
-    class="form"
-    onsubmit="register(event)">
-
-    <h1>
-      Buat akun
-    </h1>
-
-    <p>
-      Buat akun Yorune untuk menyimpan
-      data tontonanmu.
-    </p>
-
-    <div
-      id="registerMessage"
-      class="message">
-    </div>
-
-
-    <div class="field">
-
-      <label>
-        Username
-      </label>
-
-      <input
-        id="registerUsername"
-        type="text"
-        placeholder="Buat username"
-        autocomplete="username"
-        minlength="3"
-        required>
-
-    </div>
-
-
-    <div class="field">
-
-      <label>
-        Email
-      </label>
-
-      <input
-        id="registerEmail"
-        type="email"
-        placeholder="nama@email.com"
-        autocomplete="email"
-        required>
-
-    </div>
-
-
-    <div class="field">
-
-      <label>
-        Password
-      </label>
-
-      <input
-        id="registerPassword"
-        type="password"
-        placeholder="Minimal 8 karakter"
-        autocomplete="new-password"
-        minlength="8"
-        required>
-
-    </div>
-
-
-    <div class="field">
-
-      <label>
-        Konfirmasi Password
-      </label>
-
-      <input
-        id="registerConfirm"
-        type="password"
-        placeholder="Ulangi password"
-        autocomplete="new-password"
-        minlength="8"
-        required>
-
-    </div>
-
-
-    <button
-      class="submit"
-      type="submit">
-      Buat Akun
-    </button>
-
-  </form>
-
-
-  <a
-    class="guest"
-    href="index.html">
-    Lanjut sebagai Guest
-  </a>
-
-</div>
-
-
-<div class="notice">
-  Sistem akun sungguhan akan membutuhkan
-  backend/database. Jangan memasukkan
-  password asli ke versi prototype ini.
-</div>
-
-  </div>  <script>
-
-    function showForm(type) {
-
-      const loginForm =
-        document.getElementById("loginForm");
-
-      const registerForm =
-        document.getElementById("registerForm");
-
-      const loginTab =
-        document.getElementById("loginTab");
-
-      const registerTab =
-        document.getElementById("registerTab");
-
-
-      loginForm.classList.remove("active");
-      registerForm.classList.remove("active");
-
-      loginTab.classList.remove("active");
-      registerTab.classList.remove("active");
-
-
-      if (type === "login") {
-
-        loginForm.classList.add("active");
-        loginTab.classList.add("active");
-
-      } else {
-
-        registerForm.classList.add("active");
-        registerTab.classList.add("active");
-
-      }
-
-    }
-
-
-    function showMessage(
-      id,
-      text,
-      type
-    ) {
-
-      const element =
-        document.getElementById(id);
-
-      element.textContent = text;
-
-      element.className =
-        "message " + type;
-
-    }
-
-
-    function login(event) {
-
-      event.preventDefault();
-
-      const username =
-        document
-          .getElementById("loginUsername")
-          .value
-          .trim();
-
-      if (!username) {
-
-        showMessage(
-          "loginMessage",
-          "Username belum diisi.",
-          "error"
-        );
-
-        return;
-
-      }
-
-      showMessage(
-        "loginMessage",
-        "Login backend belum disambungkan. Untuk sementara gunakan Guest.",
-        "error"
-      );
-
-    }
-
-
-    function register(event) {
-
-      event.preventDefault();
-
-      const username =
-        document
-          .getElementById("registerUsername")
-          .value
-          .trim();
-
-      const email =
-        document
-          .getElementById("registerEmail")
-          .value
-          .trim();
-
-      const password =
-        document
-          .getElementById("registerPassword")
-          .value;
-
-      const confirm =
-        document
-          .getElementById("registerConfirm")
-          .value;
-
-
-      if (username.length < 3) {
-
-        showMessage(
-          "registerMessage",
-          "Username minimal 3 karakter.",
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      if (password.length < 8) {
-
-        showMessage(
-          "registerMessage",
-          "Password minimal 8 karakter.",
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      if (password !== confirm) {
-
-        showMessage(
-          "registerMessage",
-          "Konfirmasi password tidak sama.",
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      showMessage(
-        "registerMessage",
-        "Tampilan register sudah siap. Database belum disambungkan.",
-        "success"
-      );
-
-    }
-
-  </script></body>
-</html>
+            </html>
