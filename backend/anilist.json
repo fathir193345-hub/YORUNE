@@ -1,0 +1,259 @@
+import axios from "axios";
+import Fuse from "fuse.js";
+
+const client = axios.create({
+  baseURL: "https://graphql.anilist.co",
+  headers: {
+    "Content-Type": "application/json"
+  }
+});
+
+
+export async function getAnimeSummary(search) {
+
+  const response = await client.post("/", {
+
+    query: `
+      query ($search: String!) {
+        Page(perPage: 20) {
+          media(
+            search: $search
+            type: ANIME
+          ) {
+            id
+
+            title {
+              romaji
+              english
+              native
+            }
+
+            synonyms
+
+            averageScore
+
+            coverImage {
+              large
+            }
+
+            seasonYear
+          }
+        }
+      }
+    `,
+
+    variables: {
+      search
+    }
+
+  });
+
+
+  const media =
+    response.data?.data?.Page?.media || [];
+
+
+  if (!media.length) {
+    return [];
+  }
+
+
+  const options =
+    media.map(item => ({
+
+      id: item.id,
+
+      title:
+        item.title.english ||
+        item.title.romaji ||
+        item.title.native ||
+        "Unknown",
+
+      keywords: [
+        item.title.romaji,
+        item.title.english,
+        item.title.native,
+        ...(item.synonyms || [])
+      ].filter(Boolean),
+
+      score:
+        item.averageScore,
+
+      cover:
+        item.coverImage?.large || "",
+
+      year:
+        item.seasonYear
+
+    }));
+
+
+  const fuse =
+    new Fuse(options, {
+
+      keys: ["keywords"],
+
+      threshold: 0.4
+
+    });
+
+
+  const results =
+    fuse.search(search);
+
+
+  return results.map(
+    result => result.item
+  );
+}
+
+
+export async function getAnimeDetail(id) {
+
+  const response =
+    await client.post("/", {
+
+      query: `
+        query ($id: Int!) {
+
+          Media(id: $id) {
+
+            id
+
+            title {
+              romaji
+              english
+              native
+            }
+
+            status
+
+            description(asHtml: false)
+
+            startDate {
+              year
+              month
+              day
+            }
+
+            endDate {
+              year
+              month
+              day
+            }
+
+            seasonYear
+
+            episodes
+
+            duration
+
+            trailer {
+              id
+              site
+              thumbnail
+            }
+
+            coverImage {
+              large
+            }
+
+            bannerImage
+
+            genres
+
+            averageScore
+
+            studios {
+              nodes {
+                name
+              }
+            }
+
+            streamingEpisodes {
+              title
+              thumbnail
+            }
+
+          }
+
+        }
+      `,
+
+      variables: {
+        id: Number(id)
+      }
+
+    });
+
+
+  const media =
+    response.data?.data?.Media;
+
+
+  if (!media) {
+    throw new Error(
+      "Anime tidak ditemukan"
+    );
+  }
+
+
+  return {
+
+    id: media.id,
+
+    title:
+      media.title.english ||
+      media.title.romaji ||
+      media.title.native,
+
+    nativeTitle:
+      media.title.native,
+
+    status:
+      media.status,
+
+    description:
+      (media.description || "")
+        .replace(/<[^>]*>/g, ""),
+
+    startDate:
+      media.startDate,
+
+    endDate:
+      media.endDate,
+
+    year:
+      media.seasonYear,
+
+    episodes:
+      media.episodes,
+
+    duration:
+      media.duration,
+
+    trailer:
+      media.trailer,
+
+    coverImage:
+      media.coverImage?.large || "",
+
+    bannerImage:
+      media.bannerImage || "",
+
+    genres:
+      media.genres || [],
+
+    averageScore:
+      media.averageScore,
+
+    studios:
+      (media.studios?.nodes || [])
+        .map(item => item.name),
+
+    streamingEpisodes:
+      media.streamingEpisodes || []
+
+  };
+
+}
