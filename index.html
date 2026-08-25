@@ -16,7 +16,6 @@
       --text: #f5f5f7;
       --muted: #969daa;
       --accent: #b889ff;
-      --danger: #ff6978;
     }
 
     * {
@@ -36,21 +35,18 @@
       width: 100%;
       max-width: 1100px;
       margin: auto;
-      padding: 18px;
+      padding: 20px;
     }
-
-    /* HEADER */
 
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 25px;
+      padding: 10px 0 25px;
     }
 
     .logo {
-      font-size: 27px;
+      font-size: 28px;
       font-weight: 800;
     }
 
@@ -58,208 +54,85 @@
       color: var(--accent);
     }
 
-    .profile-btn {
-      width: 42px;
-      height: 42px;
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      background: var(--surface);
+    .auth {
+      display: flex;
+      gap: 8px;
+    }
+
+    .auth a {
+      text-decoration: none;
+      padding: 9px 15px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .login {
       color: var(--text);
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    /* SEARCH */
-
-    .search {
-      width: 100%;
-      height: 48px;
       border: 1px solid var(--border);
-      border-radius: 12px;
       background: var(--surface);
-      color: white;
-      outline: none;
-      padding: 0 15px;
-      margin-bottom: 25px;
     }
 
-    .search:focus {
-      border-color: var(--accent);
+    .register {
+      color: #17121f;
+      background: var(--accent);
     }
 
-    /* WELCOME */
-
-    .welcome {
+    .hero {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 18px;
-      padding: 22px;
-      margin-bottom: 25px;
+      padding: 30px 22px;
+      margin-top: 10px;
     }
 
-    .welcome h1 {
-      font-size: 23px;
-      margin-bottom: 7px;
+    .hero h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
     }
 
-    .welcome p {
+    .hero p {
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.5;
+      font-size: 14px;
+      line-height: 1.6;
+      max-width: 550px;
     }
-
-    /* SECTION */
 
     .section {
-      margin-bottom: 28px;
+      margin-top: 25px;
     }
 
-    .section-title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .section h2 {
+      font-size: 19px;
       margin-bottom: 13px;
     }
 
-    .section-title h2 {
-      font-size: 18px;
-    }
-
-    .section-title a {
-      color: var(--accent);
-      font-size: 12px;
-      text-decoration: none;
-    }
-
-    /* CARDS */
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .card {
-      min-height: 135px;
+    .empty {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 16px;
-      cursor: pointer;
-      transition: .2s;
-    }
-
-    .card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .card-icon {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--surface2);
-      border-radius: 10px;
-      margin-bottom: 13px;
-      font-size: 18px;
-    }
-
-    .card h3 {
-      font-size: 14px;
-      margin-bottom: 5px;
-    }
-
-    .card p {
+      padding: 25px;
+      text-align: center;
       color: var(--muted);
-      font-size: 11px;
-      line-height: 1.4;
+      font-size: 13px;
     }
 
-    /* GUEST */
+    @media (max-width: 500px) {
+      .app {
+        padding: 15px;
+      }
 
-    .guest-box {
-      display: none;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 25px;
-    }
+      .logo {
+        font-size: 24px;
+      }
 
-    .guest-box h2 {
-      font-size: 18px;
-      margin-bottom: 7px;
-    }
+      .auth a {
+        padding: 8px 11px;
+        font-size: 12px;
+      }
 
-    .guest-box p {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.5;
-      margin-bottom: 15px;
-    }
-
-    .login-btn {
-      display: inline-block;
-      padding: 11px 17px;
-      border-radius: 9px;
-      background: var(--accent);
-      color: #17121f;
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    /* PROFILE PANEL */
-
-    .profile-panel {
-      display: none;
-      position: fixed;
-      top: 70px;
-      right: 18px;
-      width: 240px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 16px;
-      z-index: 10;
-      box-shadow: 0 15px 40px rgba(0,0,0,.35);
-    }
-
-    .profile-panel.show {
-      display: block;
-    }
-
-    .profile-name {
-      font-weight: 800;
-      font-size: 15px;
-      margin-bottom: 5px;
-    }
-
-    .profile-email {
-      color: var(--muted);
-      font-size: 11px;
-      word-break: break-all;
-      margin-bottom: 15px;
-    }
-
-    .logout {
-      width: 100%;
-      height: 40px;
-      border: 0;
-      border-radius: 9px;
-      background: rgba(255,105,120,.12);
-      color: #ff9ba6;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    /* MOBILE */
-
-    @media (min-width: 650px) {
-      .cards {
-        grid-template-columns: repeat(4, 1fr);
+      .hero h1 {
+        font-size: 23px;
       }
     }
   </style>
@@ -267,255 +140,76 @@
 
 <body>
 
-<div class="app">
+  <div class="app">
 
-  <!-- HEADER -->
+    <header>
 
-  <header>
+      <div class="logo">
+        Yorune<span>.</span>
+      </div>
 
-    <div class="logo">
-      Yorune<span>.</span>
-    </div>
+      <div class="auth">
 
-    <button
-      id="profileButton"
-      class="profile-btn"
-      type="button">
-      ?
-    </button>
+        <a href="login.html" class="login">
+          Login
+        </a>
 
-  </header>
-
-
-  <!-- SEARCH -->
-
-  <input
-    id="searchInput"
-    class="search"
-    type="search"
-    placeholder="Cari anime...">
-
-
-  <!-- WELCOME -->
-
-  <section
-    id="welcome"
-    class="welcome">
-
-    <h1>
-      Selamat datang di Yorune.
-    </h1>
-
-    <p id="welcomeText">
-      Memuat akun...
-    </p>
-
-  </section>
-
-
-  <!-- GUEST -->
-
-  <section
-    id="guestBox"
-    class="guest-box">
-
-    <h2>
-      Kamu sedang sebagai Guest
-    </h2>
-
-    <p>
-      Login atau buat akun untuk menyimpan
-      riwayat tontonan dan data Yorune kamu.
-    </p>
-
-    <a
-      href="login.html"
-      class="login-btn">
-      Login / Register
-    </a>
-
-  </section>
-
-
-  <!-- MENU -->
-
-  <section class="section">
-
-    <div class="section-title">
-      <h2>
-        Menu
-      </h2>
-    </div>
-
-    <div class="cards">
-
-      <div
-        class="card"
-        onclick="comingSoon('Anime')">
-
-        <div class="card-icon">
-          ▶
-        </div>
-
-        <h3>
-          Anime
-        </h3>
-
-        <p>
-          Jelajahi berbagai anime.
-        </p>
+        <a href="login.html" class="register">
+          Register
+        </a>
 
       </div>
 
-
-      <div
-        class="card"
-        onclick="comingSoon('History')">
-
-        <div class="card-icon">
-          ◷
-        </div>
-
-        <h3>
-          Riwayat
-        </h3>
-
-        <p>
-          Lihat anime yang pernah ditonton.
-        </p>
-
-      </div>
+    </header>
 
 
-      <div
-        class="card"
-        onclick="comingSoon('Favorite')">
+    <main>
 
-        <div class="card-icon">
-          ★
-        </div>
+      <section class="hero">
 
-        <h3>
-          Favorit
-        </h3>
-
-        <p>
-          Anime yang kamu simpan.
-        </p>
-
-      </div>
-
-
-      <div
-        class="card"
-        onclick="comingSoon('Settings')">
-
-        <div class="card-icon">
-          ⚙
-        </div>
-
-        <h3>
-          Pengaturan
-        </h3>
-
-        <p>
-          Atur akun dan preferensi Yorune.
-        </p>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- RECOMMENDATION -->
-
-  <section class="section">
-
-    <div class="section-title">
-
-      <h2>
-        Rekomendasi
-      </h2>
-
-      <a href="#" onclick="comingSoon('Rekomendasi')">
-        Lihat semua
-      </a>
-
-    </div>
-
-    <div class="cards">
-
-      <div
-        class="card"
-        onclick="comingSoon('Anime 1')">
-
-        <div class="card-icon">
-          A
-        </div>
-
-        <h3>
-          Anime Pilihan
-        </h3>
-
-        <p>
-          Rekomendasi untuk kamu.
-        </p>
-
-      </div>
-
-
-      <div
-        class="card"
-        onclick="comingSoon('Anime 2')">
-
-        <div class="card-icon">
-          N
-        </div>
-
-        <h3>
-          Terbaru
-        </h3>
-
-        <p>
+        <h1>
           Temukan cerita baru.
+        </h1>
+
+        <p>
+          Jelajahi berbagai anime dan temukan
+          tontonan yang cocok untuk kamu di Yorune.
         </p>
 
-      </div>
-
-    </div>
-
-  </section>
-
-</div>
+      </section>
 
 
-<!-- PROFILE -->
+      <section class="section">
 
-<div
-  id="profilePanel"
-  class="profile-panel">
+        <h2>
+          Anime Terbaru
+        </h2>
 
-  <div
-    id="profileName"
-    class="profile-name">
-    Guest
+        <div class="empty">
+          Belum ada daftar anime.
+        </div>
+
+      </section>
+
+
+      <section class="section">
+
+        <h2>
+          Populer
+        </h2>
+
+        <div class="empty">
+          Belum ada daftar anime.
+        </div>
+
+      </section>
+
+    </main>
+
   </div>
 
-  <div
-    id="profileEmail"
-    class="profile-email">
-    Belum login
-  </div>
-
-  <button
-    id="logoutButton"
-    class="logout"
-    type="button">
-
-    Logout
-
+</body>
+</html>
   </button>
 
 </div>
