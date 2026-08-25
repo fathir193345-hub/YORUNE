@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0d0f13">
+
+  <title>Yorune</title>
+
+  <style>
+    :root {
+      --bg: #0d0f13;
+      --surface: #15181e;
+      --surface2: #1d2128;
+      --border: #292e37;
+      --text: #f5f5f7;
+      --muted: #969daa;
+      --accent: #b889ff;
+      --danger: #ff6978;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px;
+    }
+
+    /* HEADER */
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .logo {
+      font-size: 27px;
+      font-weight: 800;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .profile-btn {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* SEARCH */
+
+    .search {
+      width: 100%;
+      height: 48px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+      color: white;
+      outline: none;
+      padding: 0 15px;
+      margin-bottom: 25px;
+    }
+
+    .search:focus {
+      border-color: var(--accent);
+    }
+
+    /* WELCOME */
+
+    .welcome {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 25px;
+    }
+
+    .welcome h1 {
+      font-size: 23px;
+      margin-bottom: 7px;
+    }
+
+    .welcome p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* SECTION */
+
+    .section {
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 13px;
+    }
+
+    .section-title h2 {
+      font-size: 18px;
+    }
+
+    .section-title a {
+      color: var(--accent);
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    /* CARDS */
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .card {
+      min-height: 135px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface2);
+      border-radius: 10px;
+      margin-bottom: 13px;
+      font-size: 18px;
+    }
+
+    .card h3 {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    /* GUEST */
+
+    .guest-box {
+      display: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+
+    .guest-box h2 {
+      font-size: 18px;
+      margin-bottom: 7px;
+    }
+
+    .guest-box p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+
+    .login-btn {
+      display: inline-block;
+      padding: 11px 17px;
+      border-radius: 9px;
+      background: var(--accent);
+      color: #17121f;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    /* PROFILE PANEL */
+
+    .profile-panel {
+      display: none;
+      position: fixed;
+      top: 70px;
+      right: 18px;
+      width: 240px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      z-index: 10;
+      box-shadow: 0 15px 40px rgba(0,0,0,.35);
+    }
+
+    .profile-panel.show {
+      display: block;
+    }
+
+    .profile-name {
+      font-weight: 800;
+      font-size: 15px;
+      margin-bottom: 5px;
+    }
+
+    .profile-email {
+      color: var(--muted);
+      font-size: 11px;
+      word-break: break-all;
+      margin-bottom: 15px;
+    }
+
+    .logout {
+      width: 100%;
+      height: 40px;
+      border: 0;
+      border-radius: 9px;
+      background: rgba(255,105,120,.12);
+      color: #ff9ba6;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* MOBILE */
+
+    @media (min-width: 650px) {
+      .cards {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- HEADER -->
+
+  <header>
+
+    <div class="logo">
+      Yorune<span>.</span>
+    </div>
+
+    <button
+      id="profileButton"
+      class="profile-btn"
+      type="button">
+      ?
+    </button>
+
+  </header>
+
+
+  <!-- SEARCH -->
+
+  <input
+    id="searchInput"
+    class="search"
+    type="search"
+    placeholder="Cari anime...">
+
+
+  <!-- WELCOME -->
+
+  <section
+    id="welcome"
+    class="welcome">
+
+    <h1>
+      Selamat datang di Yorune.
+    </h1>
+
+    <p id="welcomeText">
+      Memuat akun...
+    </p>
+
+  </section>
+
+
+  <!-- GUEST -->
+
+  <section
+    id="guestBox"
+    class="guest-box">
+
+    <h2>
+      Kamu sedang sebagai Guest
+    </h2>
+
+    <p>
+      Login atau buat akun untuk menyimpan
+      riwayat tontonan dan data Yorune kamu.
+    </p>
+
+    <a
+      href="login.html"
+      class="login-btn">
+      Login / Register
+    </a>
+
+  </section>
+
+
+  <!-- MENU -->
+
+  <section class="section">
+
+    <div class="section-title">
+      <h2>
+        Menu
+      </h2>
+    </div>
+
+    <div class="cards">
+
+      <div
+        class="card"
+        onclick="comingSoon('Anime')">
+
+        <div class="card-icon">
+          ▶
+        </div>
+
+        <h3>
+          Anime
+        </h3>
+
+        <p>
+          Jelajahi berbagai anime.
+        </p>
+
+      </div>
+
+
+      <div
+        class="card"
+        onclick="comingSoon('History')">
+
+        <div class="card-icon">
+          ◷
+        </div>
+
+        <h3>
+          Riwayat
+        </h3>
+
+        <p>
+          Lihat anime yang pernah ditonton.
+        </p>
+
+      </div>
+
+
+      <div
+        class="card"
+        onclick="comingSoon('Favorite')">
+
+        <div class="card-icon">
+          ★
+        </div>
+
+        <h3>
+          Favorit
+        </h3>
+
+        <p>
+          Anime yang kamu simpan.
+        </p>
+
+      </div>
+
+
+      <div
+        class="card"
+        onclick="comingSoon('Settings')">
+
+        <div class="card-icon">
+          ⚙
+        </div>
+
+        <h3>
+          Pengaturan
+        </h3>
+
+        <p>
+          Atur akun dan preferensi Yorune.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- RECOMMENDATION -->
+
+  <section class="section">
+
+    <div class="section-title">
+
+      <h2>
+        Rekomendasi
+      </h2>
+
+      <a href="#" onclick="comingSoon('Rekomendasi')">
+        Lihat semua
+      </a>
+
+    </div>
+
+    <div class="cards">
+
+      <div
+        class="card"
+        onclick="comingSoon('Anime 1')">
+
+        <div class="card-icon">
+          A
+        </div>
+
+        <h3>
+          Anime Pilihan
+        </h3>
+
+        <p>
+          Rekomendasi untuk kamu.
+        </p>
+
+      </div>
+
+
+      <div
+        class="card"
+        onclick="comingSoon('Anime 2')">
+
+        <div class="card-icon">
+          N
+        </div>
+
+        <h3>
+          Terbaru
+        </h3>
+
+        <p>
+          Temukan cerita baru.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+<!-- PROFILE -->
+
+<div
+  id="profilePanel"
+  class="profile-panel">
+
+  <div
+    id="profileName"
+    class="profile-name">
+    Guest
+  </div>
+
+  <div
+    id="profileEmail"
+    class="profile-email">
+    Belum login
+  </div>
+
+  <button
+    id="logoutButton"
+    class="logout"
+    type="button">
+
+    Logout
+
+  </button>
+
+</div>
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+  /* ==============================
+     SUPABASE
+     ============================== */
+
+  const SUPABASE_URL =
+    "https://tggpvzgoxcumxvjnweem.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_sarbxo2XsnvwztX3nA81iA_6dXF-X3n";
+
+
+  const supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+
+  /* ==============================
+     ELEMENT
+     ============================== */
+
+  const profileButton =
+    document.getElementById("profileButton");
+
+  const profilePanel =
+    document.getElementById("profilePanel");
+
+  const profileName =
+    document.getElementById("profileName");
+
+  const profileEmail =
+    document.getElementById("profileEmail");
+
+  const welcomeText =
+    document.getElementById("welcomeText");
+
+  const guestBox =
+    document.getElementById("guestBox");
+
+  const logoutButton =
+    document.getElementById("logoutButton");
+
+
+  /* ==============================
+     PROFILE BUTTON
+     ============================== */
+
+  profileButton.addEventListener(
+    "click",
+    () => {
+
+      profilePanel.classList.toggle("show");
+
+    }
+  );
+
+
+  /* ==============================
+     LOAD SESSION
+     ============================== */
+
+  async function loadUser() {
+
+    const {
+      data: {
+        session
+      }
+    } =
+      await supabaseClient.auth.getSession();
+
+
+    if (!session) {
+
+      // Guest mode
+
+      profileButton.textContent = "?";
+
+      profileName.textContent =
+        "Guest";
+
+      profileEmail.textContent =
+        "Belum login";
+
+      welcomeText.textContent =
+        "Jelajahi Yorune sebagai Guest.";
+
+      guestBox.style.display =
+        "block";
+
+      logoutButton.style.display =
+        "none";
+
+      return;
+
+    }
+
+
+    // USER LOGIN
+
+    const user =
+      session.user;
+
+
+    const username =
+      user.user_metadata?.username ||
+      user.email?.split("@")[0] ||
+      "User";
+
+
+    profileButton.textContent =
+      username.charAt(0).toUpperCase();
+
+
+    profileName.textContent =
+      username;
+
+
+    profileEmail.textContent =
+      user.email || "";
+
+
+    welcomeText.textContent =
+      "Halo, " + username +
+      "! Selamat datang kembali.";
+
+
+    guestBox.style.display =
+      "none";
+
+
+    logoutButton.style.display =
+      "block";
+
+  }
+
+
+  /* ==============================
+     LOGOUT
+     ============================== */
+
+  logoutButton.addEventListener(
+    "click",
+    async () => {
+
+      logoutButton.disabled =
+        true;
+
+      logoutButton.textContent =
+        "Logout...";
+
+
+      const {
+        error
+      } =
+        await supabaseClient.auth.signOut();
+
+
+      if (error) {
+
+        console.error(error);
+
+        logoutButton.disabled =
+          false;
+
+        logoutButton.textContent =
+          "Logout";
+
+        return;
+
+      }
+
+
+      window.location.href =
+        "login.html";
+
+    }
+  );
+
+
+  /* ==============================
+     SEARCH
+     ============================== */
+
+  document
+    .getElementById("searchInput")
+    .addEventListener(
+      "keydown",
+      function(event) {
+
+        if (event.key === "Enter") {
+
+          const keyword =
+            this.value.trim();
+
+          if (!keyword) {
+            return;
+          }
+
+          alert(
+            "Pencarian \"" +
+            keyword +
+            "\" belum tersedia."
+          );
+
+        }
+
+      }
+    );
+
+
+  /* ==============================
+     MENU SEMENTARA
+     ============================== */
+
+  function comingSoon(name) {
+
+    alert(
+      name +
+      " belum tersedia. Fitur ini bisa kita sambungkan berikutnya."
+    );
+
+  }
+
+
+  /* ==============================
+     START
+     ============================== */
+
+  loadUser();
+
+</script>
+
+</body>
+  </html>
