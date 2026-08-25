@@ -16,7 +16,6 @@
       --text: #f5f5f7;
       --muted: #969daa;
       --accent: #b889ff;
-      --danger: #ff6978;
     }
 
     * {
@@ -26,15 +25,14 @@
     }
 
     body {
+      min-height: 100vh;
       background: var(--bg);
       color: var(--text);
       font-family: Arial, Helvetica, sans-serif;
-      min-height: 100vh;
     }
 
     button,
-    input,
-    textarea {
+    input {
       font: inherit;
     }
 
@@ -44,131 +42,150 @@
 
     .app {
       width: 100%;
-      max-width: 1100px;
-      margin: auto;
+      min-height: 100vh;
       padding-bottom: 80px;
     }
 
-    /* HEADER */
+    /* ================= HEADER ================= */
 
-    header {
+    .header {
       position: sticky;
       top: 0;
       z-index: 20;
-      background: rgba(13,15,19,.94);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-    }
 
-    .header-inner {
-      max-width: 1100px;
-      margin: auto;
-      padding: 14px 18px;
       display: flex;
       align-items: center;
-      gap: 15px;
+      justify-content: space-between;
+
+      height: 62px;
+      padding: 0 18px;
+
+      background: rgba(13, 15, 19, .94);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
     }
 
     .logo {
       font-size: 25px;
-      font-weight: 900;
-      white-space: nowrap;
+      font-weight: 800;
     }
 
     .logo span {
       color: var(--accent);
     }
 
-    .search {
-      flex: 1;
-      position: relative;
-    }
-
-    .search input {
-      width: 100%;
-      height: 40px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      color: white;
-      outline: none;
-      padding: 0 14px;
-    }
-
-    .search input:focus {
-      border-color: var(--accent);
-    }
-
     .profile-button {
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: white;
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
+
+      border: 0;
       border-radius: 50%;
+
+      background: var(--accent);
+      color: #17121f;
+
       font-weight: 800;
     }
 
-    /* CONTENT */
+    /* ================= CONTENT ================= */
 
-    main {
-      padding: 22px 18px;
+    .content {
+      width: 100%;
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px 16px;
     }
 
-    .hero {
-      background:
-        linear-gradient(
-          135deg,
-          rgba(184,137,255,.18),
-          rgba(184,137,255,.03)
-        );
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 25px;
+    .welcome {
+      margin-bottom: 22px;
+    }
+
+    .welcome h1 {
+      font-size: 25px;
+      margin-bottom: 5px;
+    }
+
+    .welcome p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* ================= SEARCH ================= */
+
+    .search-box {
+      display: flex;
+      gap: 8px;
       margin-bottom: 25px;
     }
 
-    .hero h1 {
-      font-size: 28px;
-      margin-bottom: 8px;
+    .search-box input {
+      flex: 1;
+
+      height: 44px;
+      padding: 0 13px;
+
+      border: 1px solid var(--border);
+      border-radius: 11px;
+
+      outline: none;
+
+      background: var(--surface);
+      color: white;
     }
 
-    .hero p {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
-      max-width: 600px;
+    .search-box input:focus {
+      border-color: var(--accent);
     }
 
-    /* SECTION */
+    .search-box button {
+      width: 48px;
+
+      border: 0;
+      border-radius: 11px;
+
+      background: var(--accent);
+      color: #17121f;
+
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    /* ================= SECTION ================= */
 
     .section {
       margin-bottom: 30px;
     }
 
-    .section-title {
+    .section-header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
+      justify-content: space-between;
+
+      margin-bottom: 13px;
     }
 
-    .section-title h2 {
-      font-size: 19px;
+    .section-title {
+      font-size: 18px;
+      font-weight: 800;
     }
 
-    .section-title span {
-      color: var(--muted);
+    .section-more {
+      border: 0;
+      background: transparent;
+      color: var(--accent);
       font-size: 12px;
     }
 
-    /* GENRE */
+    /* ================= GENRE ================= */
 
     .genres {
       display: flex;
       gap: 8px;
+
       overflow-x: auto;
       padding-bottom: 5px;
+
+      scrollbar-width: none;
     }
 
     .genres::-webkit-scrollbar {
@@ -176,50 +193,70 @@
     }
 
     .genre {
+      flex-shrink: 0;
+
       border: 1px solid var(--border);
+      border-radius: 20px;
+
+      padding: 8px 13px;
+
       background: var(--surface);
       color: var(--muted);
-      border-radius: 20px;
-      padding: 8px 13px;
-      white-space: nowrap;
+
       font-size: 12px;
     }
 
-    .genre.active {
-      background: var(--accent);
-      color: #17121f;
+    .genre.active,
+    .genre:hover {
       border-color: var(--accent);
-      font-weight: 700;
+      background: rgba(184, 137, 255, .12);
+      color: var(--accent);
     }
 
-    /* ANIME GRID */
+    /* ================= ANIME GRID ================= */
 
     .anime-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 14px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 13px;
+    }
+
+    @media (min-width: 600px) {
+      .anime-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
     }
 
     .anime-card {
       min-width: 0;
-      background: var(--surface);
+
+      overflow: hidden;
+
       border: 1px solid var(--border);
       border-radius: 13px;
-      overflow: hidden;
-      transition: .2s;
+
+      background: var(--surface);
     }
 
-    .anime-card:hover {
-      transform: translateY(-3px);
-      border-color: #464c58;
-    }
-
-    .poster {
+    .anime-cover {
       width: 100%;
       aspect-ratio: 2 / 3;
-      background: var(--surface2);
-      object-fit: cover;
-      display: block;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        linear-gradient(
+          145deg,
+          #24202d,
+          #17191f
+        );
+
+      color: var(--muted);
+      font-size: 11px;
+      text-align: center;
+      padding: 10px;
     }
 
     .anime-info {
@@ -229,322 +266,253 @@
     .anime-title {
       font-size: 13px;
       font-weight: 700;
-      white-space: nowrap;
+      line-height: 1.35;
+
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
       overflow: hidden;
-      text-overflow: ellipsis;
-      margin-bottom: 5px;
     }
 
     .anime-meta {
+      margin-top: 5px;
+
       color: var(--muted);
       font-size: 10px;
-      margin-bottom: 9px;
     }
 
-    .save-button {
-      width: 100%;
-      height: 32px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--surface2);
+    /* ================= EMPTY ================= */
+
+    .empty {
+      display: none;
+
+      padding: 35px 15px;
+
+      border: 1px dashed var(--border);
+      border-radius: 13px;
+
       color: var(--muted);
-      font-size: 11px;
+      text-align: center;
+      font-size: 13px;
     }
 
-    .save-button.saved {
-      background: rgba(184,137,255,.15);
-      color: var(--accent);
-      border-color: rgba(184,137,255,.35);
-    }
-
-    /* PROFILE */
+    /* ================= PROFILE ================= */
 
     .profile-panel {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+
       display: none;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 25px;
+
+      background: rgba(0, 0, 0, .65);
+      backdrop-filter: blur(5px);
     }
 
     .profile-panel.active {
-      display: block;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
     }
 
-    .profile-head {
+    .profile-card {
+      width: 100%;
+      max-width: 500px;
+
+      padding: 22px;
+
+      border: 1px solid var(--border);
+      border-radius: 20px 20px 0 0;
+
+      background: var(--surface);
+    }
+
+    .profile-top {
       display: flex;
       align-items: center;
-      gap: 14px;
-      margin-bottom: 18px;
+      gap: 13px;
+
+      margin-bottom: 20px;
     }
 
     .avatar {
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      background: var(--accent);
-      color: #17121f;
+      width: 52px;
+      height: 52px;
+
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 900;
+
+      border-radius: 50%;
+
+      background: var(--accent);
+      color: #17121f;
+
       font-size: 20px;
+      font-weight: 800;
     }
 
     .profile-name {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 800;
     }
 
     .profile-email {
       color: var(--muted);
       font-size: 11px;
-      margin-top: 4px;
+      margin-top: 3px;
     }
 
-    .logout {
+    .profile-item {
       width: 100%;
-      height: 40px;
-      border: 1px solid rgba(255,105,120,.3);
-      border-radius: 9px;
-      background: rgba(255,105,120,.08);
-      color: #ff9ba6;
-      font-weight: 700;
-    }
 
-    /* COMMENTS */
+      padding: 13px 0;
 
-    .comment-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 15px;
-      padding: 15px;
-    }
-
-    .comment-box textarea {
-      width: 100%;
-      min-height: 80px;
-      resize: vertical;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      color: white;
-      outline: none;
-      padding: 11px;
-      margin-bottom: 10px;
-    }
-
-    .comment-box textarea:focus {
-      border-color: var(--accent);
-    }
-
-    .comment-submit {
-      height: 38px;
-      padding: 0 15px;
       border: 0;
-      border-radius: 9px;
-      background: var(--accent);
-      color: #17121f;
-      font-weight: 800;
+      border-bottom: 1px solid var(--border);
+
+      background: transparent;
+
+      color: var(--text);
+      text-align: left;
+      font-size: 13px;
     }
 
-    .comments {
+    .profile-item.logout {
+      color: #ff8d99;
+      border-bottom: 0;
+    }
+
+    .close-profile {
+      width: 100%;
+      height: 43px;
+
       margin-top: 12px;
-    }
 
-    .comment {
-      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 13px;
-      margin-bottom: 9px;
+      border-radius: 10px;
+
+      background: var(--surface2);
+      color: var(--text);
     }
 
-    .comment-user {
-      font-weight: 700;
-      font-size: 12px;
-      margin-bottom: 5px;
-    }
+    /* ================= LOADING ================= */
 
-    .comment-text {
-      color: #c5c8cf;
-      font-size: 12px;
-      line-height: 1.5;
-    }
+    .loading {
+      padding: 40px 10px;
 
-    .comment-date {
-      color: #666b75;
-      font-size: 9px;
-      margin-top: 7px;
-    }
-
-    .empty {
-      text-align: center;
       color: var(--muted);
-      padding: 30px 10px;
-      font-size: 12px;
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 800px) {
-      .anime-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .header-inner {
-        padding: 12px;
-      }
-
-      .logo {
-        font-size: 21px;
-      }
-
-      main {
-        padding: 16px 12px;
-      }
-
-      .hero {
-        padding: 20px;
-      }
-
-      .hero h1 {
-        font-size: 23px;
-      }
-
-      .anime-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-      }
-
-      .anime-info {
-        padding: 8px;
-      }
-
-      .anime-title {
-        font-size: 11px;
-      }
-
-      .anime-meta {
-        font-size: 9px;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .anime-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .search {
-        min-width: 100px;
-      }
+      text-align: center;
+      font-size: 13px;
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  <div class="header-inner">
+<div class="app">
+
+  <!-- HEADER -->
+
+  <header class="header">
 
     <div class="logo">
       Yorune<span>.</span>
     </div>
 
-    <div class="search">
+    <button
+      class="profile-button"
+      id="profileButton"
+      type="button"
+      onclick="openProfile()">
+      ?
+    </button>
+
+  </header>
+
+
+  <!-- CONTENT -->
+
+  <main class="content">
+
+    <section class="welcome">
+
+      <h1 id="welcomeTitle">
+        Selamat datang
+      </h1>
+
+      <p>
+        Temukan cerita baru untuk ditonton.
+      </p>
+
+    </section>
+
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
       <input
         id="searchInput"
         type="search"
         placeholder="Cari anime..."
-        oninput="renderAnime()">
-    </div>
-
-    <button
-      class="profile-button"
-      onclick="toggleProfile()"
-      id="profileButton">
-      ?
-    </button>
-
-  </div>
-</header>
-
-
-<div class="app">
-
-  <main>
-
-    <!-- PROFILE -->
-
-    <div
-      id="profilePanel"
-      class="profile-panel">
-
-      <div class="profile-head">
-
-        <div
-          id="avatar"
-          class="avatar">
-          ?
-        </div>
-
-        <div>
-
-          <div
-            id="profileName"
-            class="profile-name">
-            Loading...
-          </div>
-
-          <div
-            id="profileEmail"
-            class="profile-email">
-            Loading...
-          </div>
-
-        </div>
-
-      </div>
+        autocomplete="off">
 
       <button
-        class="logout"
-        onclick="logout()">
-        Keluar dari akun
+        type="button"
+        onclick="searchAnime()">
+        🔍
       </button>
 
     </div>
-
-
-    <!-- HERO -->
-
-    <section class="hero">
-
-      <h1>
-        Halo, <span id="heroUsername">Yorune</span> 👋
-      </h1>
-
-      <p>
-        Temukan anime baru, simpan tontonan favorit,
-        dan bagikan pendapatmu bersama pengguna Yorune.
-      </p>
-
-    </section>
 
 
     <!-- GENRE -->
 
     <section class="section">
 
-      <div class="section-title">
-        <h2>Genre</h2>
+      <div class="section-header">
+
+        <h2 class="section-title">
+          Genre
+        </h2>
+
       </div>
 
-      <div
-        id="genreList"
-        class="genres">
+      <div class="genres">
+
+        <button class="genre active" onclick="filterGenre('Semua', this)">
+          Semua
+        </button>
+
+        <button class="genre" onclick="filterGenre('Action', this)">
+          Action
+        </button>
+
+        <button class="genre" onclick="filterGenre('Adventure', this)">
+          Adventure
+        </button>
+
+        <button class="genre" onclick="filterGenre('Comedy', this)">
+          Comedy
+        </button>
+
+        <button class="genre" onclick="filterGenre('Fantasy', this)">
+          Fantasy
+        </button>
+
+        <button class="genre" onclick="filterGenre('Romance', this)">
+          Romance
+        </button>
+
+        <button class="genre" onclick="filterGenre('Isekai', this)">
+          Isekai
+        </button>
+
+        <button class="genre" onclick="filterGenre('Drama', this)">
+          Drama
+        </button>
+
       </div>
 
     </section>
@@ -554,16 +522,20 @@
 
     <section class="section">
 
-      <div class="section-title">
+      <div class="section-header">
 
-        <h2 id="animeSectionTitle">
+        <h2
+          class="section-title"
+          id="animeSectionTitle">
           Anime
         </h2>
 
-        <span id="animeCount">
-          0 anime
-        </span>
+      </div>
 
+      <div
+        id="loading"
+        class="loading">
+        Memuat anime...
       </div>
 
       <div
@@ -571,58 +543,10 @@
         class="anime-grid">
       </div>
 
-    </section>
-
-
-    <!-- SAVED -->
-
-    <section class="section">
-
-      <div class="section-title">
-
-        <h2>
-          🔖 Tersimpan
-        </h2>
-
-        <span>
-          Koleksi kamu
-        </span>
-
-      </div>
-
       <div
-        id="savedGrid"
-        class="anime-grid">
-      </div>
-
-    </section>
-
-
-    <!-- COMMENTS -->
-
-    <section class="section">
-
-      <div class="section-title">
-        <h2>💬 Komentar</h2>
-      </div>
-
-      <div class="comment-box">
-
-        <textarea
-          id="commentInput"
-          placeholder="Tulis komentar kamu..."></textarea>
-
-        <button
-          class="comment-submit"
-          onclick="addComment()">
-          Kirim Komentar
-        </button>
-
-      </div>
-
-      <div
-        id="comments"
-        class="comments">
+        id="empty"
+        class="empty">
+        Anime tidak ditemukan.
       </div>
 
     </section>
@@ -632,19 +556,101 @@
 </div>
 
 
+<!-- PROFILE -->
+
+<div
+  id="profilePanel"
+  class="profile-panel"
+  onclick="closeProfileOutside(event)">
+
+  <div
+    class="profile-card">
+
+    <div class="profile-top">
+
+      <div
+        class="avatar"
+        id="avatar">
+        ?
+      </div>
+
+      <div>
+
+        <div
+          class="profile-name"
+          id="profileName">
+          User
+        </div>
+
+        <div
+          class="profile-email"
+          id="profileEmail">
+          -
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="profile-item"
+      type="button">
+
+      👤 Profil akun
+
+    </button>
+
+
+    <button
+      class="profile-item"
+      type="button">
+
+      ⚙️ Pengaturan
+
+    </button>
+
+
+    <button
+      class="profile-item logout"
+      type="button"
+      onclick="logout()">
+
+      Keluar dari akun
+
+    </button>
+
+
+    <button
+      class="close-profile"
+      type="button"
+      onclick="closeProfile()">
+
+      Tutup
+
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- SUPABASE -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
-  /* ==========================
+  /* ==========================================
      SUPABASE
-     ========================== */
+     ========================================== */
 
   const SUPABASE_URL =
     "https://tggpvzgoxcumxvjnweem.supabase.co";
 
   const SUPABASE_KEY =
     "sb_publishable_sarbxo2XsnvwztX3nA81iA_6dXF-X3n";
+
 
   const supabaseClient =
     window.supabase.createClient(
@@ -653,656 +659,316 @@
     );
 
 
-  let currentUser = null;
-  let currentGenre = "Semua";
-
-
-  /* ==========================
-     DATA ANIME CONTOH
-     ========================== */
+  /* ==========================================
+     DATA ANIME SEMENTARA
+     ========================================== */
 
   const animeList = [
 
     {
-      id: "one-piece",
-      title: "One Piece",
-      year: "1999",
-      genres: ["Action", "Adventure", "Comedy"],
-      image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600"
+      title: "Frieren: Beyond Journey's End",
+      genre: ["Adventure", "Fantasy", "Drama"],
+      type: "TV"
     },
 
     {
-      id: "naruto",
-      title: "Naruto",
-      year: "2002",
-      genres: ["Action", "Adventure", "Comedy"],
-      image: "https://images.unsplash.com/photo-1618336753974-aae8e04506aa?w=600"
+      title: "The Apothecary Diaries",
+      genre: ["Drama", "Romance"],
+      type: "TV"
     },
 
     {
-      id: "bleach",
-      title: "Bleach",
-      year: "2004",
-      genres: ["Action", "Fantasy"],
-      image: "https://images.unsplash.com/photo-1578632292335-df3abbb0d586?w=600"
+      title: "KonoSuba",
+      genre: ["Comedy", "Fantasy", "Isekai"],
+      type: "TV"
     },
 
     {
-      id: "frieren",
-      title: "Frieren",
-      year: "2023",
-      genres: ["Adventure", "Fantasy", "Drama"],
-      image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600"
+      title: "Re:ZERO",
+      genre: ["Fantasy", "Isekai", "Drama"],
+      type: "TV"
     },
 
     {
-      id: "spy-family",
-      title: "Spy x Family",
-      year: "2022",
-      genres: ["Comedy", "Action"],
-      image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600"
+      title: "One Punch Man",
+      genre: ["Action", "Comedy"],
+      type: "TV"
     },
 
     {
-      id: "jujutsu-kaisen",
-      title: "Jujutsu Kaisen",
-      year: "2020",
-      genres: ["Action", "Fantasy"],
-      image: "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?w=600"
+      title: "That Time I Got Reincarnated as a Slime",
+      genre: ["Action", "Fantasy", "Isekai"],
+      type: "TV"
     },
 
     {
-      id: "kaguya-sama",
-      title: "Kaguya-sama",
-      year: "2019",
-      genres: ["Romance", "Comedy"],
-      image: "https://images.unsplash.com/photo-1531058020387-3be344556be6?w=600"
+      title: "Horimiya",
+      genre: ["Romance", "Comedy", "Drama"],
+      type: "TV"
     },
 
     {
-      id: "isekai-shokudou",
-      title: "Isekai Shokudou",
-      year: "2017",
-      genres: ["Fantasy", "Comedy"],
-      image: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600"
+      title: "Delicious in Dungeon",
+      genre: ["Adventure", "Comedy", "Fantasy"],
+      type: "TV"
     }
 
   ];
 
 
-  /* ==========================
-     SESSION
-     ========================== */
+  let currentGenre = "Semua";
+  let currentSearch = "";
 
-  async function init() {
+
+  /* ==========================================
+     CEK USER
+     ========================================== */
+
+  async function loadUser() {
 
     const {
-      data: {
-        session
-      }
-    } =
-      await supabaseClient.auth.getSession();
+      data: { session }
+    } = await supabaseClient.auth.getSession();
 
 
     if (!session) {
 
-      window.location.href =
-        "login.html";
+      window.location.href = "login.html";
 
       return;
+
     }
 
 
-    currentUser =
-      session.user;
+    const user = session.user;
 
 
-    await loadProfile();
+    const username =
+      user.user_metadata?.username ||
+      user.email?.split("@")[0] ||
+      "User";
 
-    await loadSaved();
 
-    await loadComments();
+    document.getElementById("welcomeTitle").textContent =
+      "Halo, " + username;
 
-    renderGenres();
+
+    document.getElementById("profileName").textContent =
+      username;
+
+
+    document.getElementById("profileEmail").textContent =
+      user.email || "-";
+
+
+    const initial =
+      username
+        .charAt(0)
+        .toUpperCase();
+
+
+    document.getElementById("avatar").textContent =
+      initial;
+
+
+    document.getElementById("profileButton").textContent =
+      initial;
+
+
+    document.getElementById("loading").style.display =
+      "none";
+
 
     renderAnime();
 
   }
 
 
-  /* ==========================
-     PROFILE
-     ========================== */
-
-  async function loadProfile() {
-
-    const metadata =
-      currentUser.user_metadata || {};
-
-    const username =
-      metadata.username ||
-      currentUser.email.split("@")[0];
-
-
-    document
-      .getElementById("profileName")
-      .textContent =
-      username;
-
-
-    document
-      .getElementById("profileEmail")
-      .textContent =
-      currentUser.email;
-
-
-    document
-      .getElementById("heroUsername")
-      .textContent =
-      username;
-
-
-    document
-      .getElementById("profileButton")
-      .textContent =
-      username.charAt(0).toUpperCase();
-
-
-    document
-      .getElementById("avatar")
-      .textContent =
-      username.charAt(0).toUpperCase();
-
-  }
-
-
-  function toggleProfile() {
-
-    document
-      .getElementById("profilePanel")
-      .classList.toggle("active");
-
-  }
-
-
-  /* ==========================
-     GENRE
-     ========================== */
-
-  function renderGenres() {
-
-    const genres = [
-      "Semua",
-      "Action",
-      "Adventure",
-      "Comedy",
-      "Fantasy",
-      "Romance",
-      "Drama"
-    ];
-
-
-    const container =
-      document.getElementById("genreList");
-
-
-    container.innerHTML = "";
-
-
-    genres.forEach(genre => {
-
-      const button =
-        document.createElement("button");
-
-      button.className =
-        "genre" +
-        (genre === currentGenre ? " active" : "");
-
-      button.textContent =
-        genre;
-
-
-      button.onclick = () => {
-
-        currentGenre =
-          genre;
-
-        renderGenres();
-        renderAnime();
-
-      };
-
-
-      container.appendChild(button);
-
-    });
-
-  }
-
-
-  /* ==========================
-     ANIME
-     ========================== */
+  /* ==========================================
+     RENDER ANIME
+     ========================================== */
 
   function renderAnime() {
-
-    const query =
-      document
-        .getElementById("searchInput")
-        .value
-        .toLowerCase()
-        .trim();
-
-
-    const filtered =
-      animeList.filter(anime => {
-
-        const matchSearch =
-          anime.title
-            .toLowerCase()
-            .includes(query);
-
-
-        const matchGenre =
-          currentGenre === "Semua" ||
-          anime.genres.includes(currentGenre);
-
-
-        return matchSearch && matchGenre;
-
-      });
-
-
-    document
-      .getElementById("animeCount")
-      .textContent =
-      filtered.length + " anime";
-
 
     const grid =
       document.getElementById("animeGrid");
 
+    const empty =
+      document.getElementById("empty");
+
 
     grid.innerHTML = "";
 
 
-    if (!filtered.length) {
+    const results =
+      animeList.filter(anime => {
 
-      grid.innerHTML =
-        `<div class="empty">
-          Anime tidak ditemukan.
-        </div>`;
+        const genreMatch =
+          currentGenre === "Semua" ||
+          anime.genre.includes(currentGenre);
+
+
+        const searchMatch =
+          anime.title
+            .toLowerCase()
+            .includes(
+              currentSearch.toLowerCase()
+            );
+
+
+        return genreMatch && searchMatch;
+
+      });
+
+
+    if (!results.length) {
+
+      empty.style.display = "block";
 
       return;
+
     }
 
 
-    filtered.forEach(anime => {
-
-      grid.appendChild(
-        createAnimeCard(anime)
-      );
-
-    });
-
-  }
+    empty.style.display = "none";
 
 
-  function createAnimeCard(anime, saved = false) {
+    results.forEach(anime => {
 
-    const card =
-      document.createElement("div");
+      const card =
+        document.createElement("div");
 
-    card.className =
-      "anime-card";
+      card.className = "anime-card";
 
 
-    card.innerHTML = `
+      card.innerHTML = `
 
-      <img
-        class="poster"
-        src="${anime.image}"
-        alt="${anime.title}"
-        loading="lazy">
-
-      <div class="anime-info">
-
-        <div class="anime-title">
+        <div class="anime-cover">
           ${anime.title}
         </div>
 
-        <div class="anime-meta">
-          ${anime.year} • ${anime.genres.join(", ")}
-        </div>
+        <div class="anime-info">
 
-        <button
-          class="save-button ${saved ? "saved" : ""}"
-          onclick="toggleSave('${anime.id}')">
+          <div class="anime-title">
+            ${anime.title}
+          </div>
 
-          ${saved ? "✓ Tersimpan" : "🔖 Simpan"}
+          <div class="anime-meta">
+            ${anime.type} • ${anime.genre.join(" • ")}
+          </div>
 
-        </button>
-
-      </div>
-    `;
-
-
-    return card;
-
-  }
-
-
-  /* ==========================
-     SAVED
-     ========================== */
-
-  let savedIds = [];
-
-
-  async function loadSaved() {
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("saved_anime")
-        .select("anime_id")
-        .eq("user_id", currentUser.id);
-
-
-    if (error) {
-
-      console.error(
-        "Gagal mengambil anime tersimpan:",
-        error
-      );
-
-      renderSaved();
-
-      return;
-    }
-
-
-    savedIds =
-      data.map(item => item.anime_id);
-
-
-    renderSaved();
-
-  }
-
-
-  function renderSaved() {
-
-    const grid =
-      document.getElementById("savedGrid");
-
-
-    grid.innerHTML = "";
-
-
-    const savedAnime =
-      animeList.filter(anime =>
-        savedIds.includes(anime.id)
-      );
-
-
-    if (!savedAnime.length) {
-
-      grid.innerHTML =
-        `<div class="empty">
-          Belum ada anime yang disimpan.
-        </div>`;
-
-      return;
-    }
-
-
-    savedAnime.forEach(anime => {
-
-      grid.appendChild(
-        createAnimeCard(anime, true)
-      );
-
-    });
-
-  }
-
-
-  async function toggleSave(animeId) {
-
-    if (!currentUser) {
-      return;
-    }
-
-
-    const exists =
-      savedIds.includes(animeId);
-
-
-    if (exists) {
-
-      const {
-        error
-      } =
-        await supabaseClient
-          .from("saved_anime")
-          .delete()
-          .eq("user_id", currentUser.id)
-          .eq("anime_id", animeId);
-
-
-      if (error) {
-
-        alert(error.message);
-
-        return;
-      }
-
-
-      savedIds =
-        savedIds.filter(
-          id => id !== animeId
-        );
-
-    } else {
-
-      const {
-        error
-      } =
-        await supabaseClient
-          .from("saved_anime")
-          .insert({
-
-            user_id: currentUser.id,
-            anime_id: animeId
-
-          });
-
-
-      if (error) {
-
-        alert(error.message);
-
-        return;
-      }
-
-
-      savedIds.push(animeId);
-
-    }
-
-
-    renderAnime();
-    renderSaved();
-
-  }
-
-
-  /* ==========================
-     COMMENTS
-     ========================== */
-
-  async function loadComments() {
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("comments")
-        .select("*")
-        .order("created_at", {
-          ascending: false
-        })
-        .limit(30);
-
-
-    if (error) {
-
-      console.error(
-        "Gagal mengambil komentar:",
-        error
-      );
-
-      return;
-    }
-
-
-    renderComments(data || []);
-
-  }
-
-
-  function renderComments(comments) {
-
-    const container =
-      document.getElementById("comments");
-
-
-    container.innerHTML = "";
-
-
-    if (!comments.length) {
-
-      container.innerHTML =
-        `<div class="empty">
-          Belum ada komentar.
-        </div>`;
-
-      return;
-    }
-
-
-    comments.forEach(comment => {
-
-      const div =
-        document.createElement("div");
-
-      div.className =
-        "comment";
-
-
-      div.innerHTML = `
-
-        <div class="comment-user">
-          ${escapeHTML(
-            comment.username || "User"
-          )}
-        </div>
-
-        <div class="comment-text">
-          ${escapeHTML(
-            comment.content
-          )}
-        </div>
-
-        <div class="comment-date">
-          ${new Date(
-            comment.created_at
-          ).toLocaleString("id-ID")}
         </div>
 
       `;
 
 
-      container.appendChild(div);
+      grid.appendChild(card);
 
     });
 
   }
 
 
-  async function addComment() {
+  /* ==========================================
+     SEARCH
+     ========================================== */
 
-    const input =
-      document.getElementById("commentInput");
+  function searchAnime() {
 
+    currentSearch =
+      document
+        .getElementById("searchInput")
+        .value
+        .trim();
 
-    const content =
-      input.value.trim();
-
-
-    if (!content) {
-
-      alert("Komentar belum diisi.");
-
-      return;
-    }
-
-
-    const username =
-      currentUser.user_metadata?.username ||
-      currentUser.email.split("@")[0];
-
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .from("comments")
-        .insert({
-
-          user_id: currentUser.id,
-          username: username,
-          content: content
-
-        });
-
-
-    if (error) {
-
-      alert(error.message);
-
-      return;
-    }
-
-
-    input.value = "";
-
-    await loadComments();
+    renderAnime();
 
   }
 
 
-  function escapeHTML(value) {
+  document
+    .getElementById("searchInput")
+    .addEventListener(
+      "input",
+      searchAnime
+    );
 
-    return String(value)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
+
+  /* ==========================================
+     FILTER GENRE
+     ========================================== */
+
+  function filterGenre(genre, button) {
+
+    currentGenre = genre;
+
+
+    document
+      .querySelectorAll(".genre")
+      .forEach(item => {
+
+        item.classList.remove("active");
+
+      });
+
+
+    button.classList.add("active");
+
+
+    renderAnime();
 
   }
 
 
-  /* ==========================
+  /* ==========================================
+     PROFILE
+     ========================================== */
+
+  function openProfile() {
+
+    document
+      .getElementById("profilePanel")
+      .classList.add("active");
+
+  }
+
+
+  function closeProfile() {
+
+    document
+      .getElementById("profilePanel")
+      .classList.remove("active");
+
+  }
+
+
+  function closeProfileOutside(event) {
+
+    if (
+      event.target.id === "profilePanel"
+    ) {
+
+      closeProfile();
+
+    }
+
+  }
+
+
+  /* ==========================================
      LOGOUT
-     ========================== */
+     ========================================== */
 
   async function logout() {
+
+    const confirmed =
+      confirm("Yakin ingin keluar dari akun?");
+
+
+    if (!confirmed) {
+      return;
+    }
+
 
     const {
       error
@@ -1312,9 +978,13 @@
 
     if (error) {
 
-      alert(error.message);
+      alert(
+        "Gagal logout: " +
+        error.message
+      );
 
       return;
+
     }
 
 
@@ -1324,11 +994,32 @@
   }
 
 
-  /* ==========================
+  /* ==========================================
      START
-     ========================== */
+     ========================================== */
 
-  init();
+  loadUser();
+
+
+  /* ==========================================
+     JIKA SESSION BERUBAH
+     ========================================== */
+
+  supabaseClient.auth.onAuthStateChange(
+    (event, session) => {
+
+      if (
+        event === "SIGNED_OUT" ||
+        !session
+      ) {
+
+        window.location.href =
+          "login.html";
+
+      }
+
+    }
+  );
 
 </script>
 
