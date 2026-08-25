@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0d0f13">
+
+  <title>Yorune — Anime</title>
+
+  <style>
+    :root {
+      --bg: #0d0f13;
+      --surface: #15181e;
+      --surface2: #1d2128;
+      --border: #292e37;
+      --text: #f5f5f7;
+      --muted: #969daa;
+      --accent: #b889ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+
+      height: 62px;
+      padding: 0 17px;
+
+      display: flex;
+      align-items: center;
+
+      background: rgba(13,15,19,.95);
+      border-bottom: 1px solid var(--border);
+
+      backdrop-filter: blur(12px);
+    }
+
+    .back-button {
+      width: 40px;
+      height: 40px;
+
+      border: 1px solid var(--border);
+      border-radius: 10px;
+
+      background: var(--surface);
+      color: var(--text);
+
+      font-size: 20px;
+    }
+
+    .logo {
+      margin-left: 12px;
+
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .content {
+      width: 100%;
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px 16px 50px;
+    }
+
+    .loading,
+    .error {
+      padding: 60px 15px;
+
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .error {
+      color: #ff8d99;
+    }
+
+    /* HERO */
+
+    .hero {
+      position: relative;
+
+      overflow: hidden;
+
+      min-height: 300px;
+
+      border: 1px solid var(--border);
+      border-radius: 18px;
+
+      background: var(--surface);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+
+      background-position: center;
+      background-size: cover;
+
+      opacity: .25;
+
+      filter: blur(2px);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(13,15,19,.25),
+          rgba(13,15,19,.98)
+        );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+
+      min-height: 300px;
+
+      display: flex;
+      align-items: flex-end;
+
+      gap: 18px;
+
+      padding: 20px;
+    }
+
+    .cover {
+      width: 145px;
+      flex-shrink: 0;
+
+      aspect-ratio: 2 / 3;
+
+      overflow: hidden;
+
+      border-radius: 12px;
+
+      background: var(--surface2);
+      border: 1px solid var(--border);
+    }
+
+    .cover img {
+      width: 100%;
+      height: 100%;
+
+      display: block;
+
+      object-fit: cover;
+    }
+
+    .hero-info {
+      padding-bottom: 3px;
+    }
+
+    .title {
+      font-size: 25px;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    .native-title {
+      margin-top: 6px;
+
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 6px;
+
+      margin-top: 12px;
+    }
+
+    .tag {
+      padding: 5px 8px;
+
+      border: 1px solid var(--border);
+      border-radius: 7px;
+
+      background: rgba(21,24,30,.85);
+
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .score {
+      color: var(--accent);
+    }
+
+    /* INFO */
+
+    .section {
+      margin-top: 25px;
+    }
+
+    .section-title {
+      margin-bottom: 12px;
+
+      font-size: 18px;
+    }
+
+    .description {
+      color: #c6cad2;
+
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .genres {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .genre {
+      padding: 7px 10px;
+
+      border-radius: 20px;
+
+      background: rgba(184,137,255,.1);
+      border: 1px solid rgba(184,137,255,.25);
+
+      color: var(--accent);
+
+      font-size: 11px;
+    }
+
+    .details {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .detail {
+      padding: 13px;
+
+      border: 1px solid var(--border);
+      border-radius: 11px;
+
+      background: var(--surface);
+    }
+
+    .detail-label {
+      color: var(--muted);
+      font-size: 10px;
+      margin-bottom: 5px;
+    }
+
+    .detail-value {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* EPISODES */
+
+    .episode-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .episode {
+      min-height: 43px;
+
+      border: 1px solid var(--border);
+      border-radius: 9px;
+
+      background: var(--surface);
+
+      color: var(--text);
+
+      font-size: 12px;
+    }
+
+    .episode:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .episode.disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    /* TRAILER */
+
+    .trailer {
+      overflow: hidden;
+
+      border: 1px solid var(--border);
+      border-radius: 13px;
+
+      background: var(--surface);
+
+      aspect-ratio: 16 / 9;
+    }
+
+    .trailer iframe {
+      width: 100%;
+      height: 100%;
+
+      border: 0;
+    }
+
+    @media (max-width: 600px) {
+      .hero-content {
+        align-items: flex-end;
+      }
+
+      .cover {
+        width: 110px;
+      }
+
+      .title {
+        font-size: 19px;
+      }
+
+      .episode-grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+
+    @media (max-width: 420px) {
+      .hero-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .cover {
+        width: 125px;
+      }
+
+      .details {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="header">
+
+  <button
+    class="back-button"
+    onclick="goBack()"
+    type="button">
+    ←
+  </button>
+
+  <div class="logo">
+    Yorune<span>.</span>
+  </div>
+
+</header>
+
+
+<main class="content">
+
+  <div id="loading" class="loading">
+    Memuat informasi anime...
+  </div>
+
+  <div
+    id="error"
+    class="error"
+    style="display:none;">
+  </div>
+
+
+  <div
+    id="animeContent"
+    style="display:none;">
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+      <div
+        id="heroBg"
+        class="hero-bg">
+      </div>
+
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+
+        <div class="cover">
+
+          <img
+            id="coverImage"
+            src=""
+            alt="Cover anime">
+
+        </div>
+
+        <div class="hero-info">
+
+          <h1
+            id="animeTitle"
+            class="title">
+          </h1>
+
+          <div
+            id="nativeTitle"
+            class="native-title">
+          </div>
+
+          <div
+            id="meta"
+            class="meta">
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- DESCRIPTION -->
+
+    <section class="section">
+
+      <h2 class="section-title">
+        Sinopsis
+      </h2>
+
+      <p
+        id="description"
+        class="description">
+      </p>
+
+    </section>
+
+
+    <!-- GENRE -->
+
+    <section class="section">
+
+      <h2 class="section-title">
+        Genre
+      </h2>
+
+      <div
+        id="genres"
+        class="genres">
+      </div>
+
+    </section>
+
+
+    <!-- DETAILS -->
+
+    <section class="section">
+
+      <h2 class="section-title">
+        Informasi
+      </h2>
+
+      <div
+        id="details"
+        class="details">
+      </div>
+
+    </section>
+
+
+    <!-- EPISODES -->
+
+    <section class="section">
+
+      <h2 class="section-title">
+        Episode
+      </h2>
+
+      <div
+        id="episodes"
+        class="episode-grid">
+      </div>
+
+    </section>
+
+
+    <!-- TRAILER -->
+
+    <section
+      id="trailerSection"
+      class="section"
+      style="display:none;">
+
+      <h2 class="section-title">
+        Trailer
+      </h2>
+
+      <div class="trailer">
+
+        <iframe
+          id="trailerFrame"
+          allowfullscreen>
+        </iframe>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</main>
+
+
+<script>
+
+  /* =====================================
+     ANILIST API
+     ===================================== */
+
+  const ANILIST_API =
+    "https://graphql.anilist.co";
+
+
+  /* =====================================
+     AMBIL ID / JUDUL DARI URL
+     ===================================== */
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const animeId =
+    params.get("id");
+
+  const animeTitle =
+    params.get("title");
+
+
+  /* =====================================
+     QUERY ANILIST
+     ===================================== */
+
+  const query = `
+    query ($id: Int, $search: String) {
+
+      Media(
+        id: $id,
+        search: $search,
+        type: ANIME
+      ) {
+
+        id
+
+        title {
+          romaji
+          english
+          native
+        }
+
+        status
+
+        description(asHtml: false)
+
+        startDate {
+          year
+          month
+          day
+        }
+
+        endDate {
+          year
+          month
+          day
+        }
+
+        seasonYear
+
+        episodes
+
+        duration
+
+        coverImage {
+          large
+        }
+
+        bannerImage
+
+        genres
+
+        averageScore
+
+        studios {
+          nodes {
+            name
+          }
+        }
+
+        trailer {
+          id
+          site
+          thumbnail
+        }
+
+      }
+
+    }
+  `;
+
+
+  /* =====================================
+     LOAD ANIME
+     ===================================== */
+
+  async function loadAnime() {
+
+    if (!animeId && !animeTitle) {
+
+      showError(
+        "Anime tidak ditemukan."
+      );
+
+      return;
+
+    }
+
+
+    try {
+
+      const variables = {};
+
+
+      if (animeId) {
+
+        variables.id =
+          Number(animeId);
+
+      } else {
+
+        variables.search =
+          animeTitle;
+
+      }
+
+
+      const response =
+        await fetch(
+          ANILIST_API,
+          {
+
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+
+            body: JSON.stringify({
+              query,
+              variables
+            })
+
+          }
+        );
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          "Gagal menghubungi AniList."
+        );
+
+      }
+
+
+      const result =
+        await response.json();
+
+
+      const media =
+        result?.data?.Media;
+
+
+      if (!media) {
+
+        throw new Error(
+          "Anime tidak ditemukan."
+        );
+
+      }
+
+
+      renderAnime(media);
+
+    } catch (error) {
+
+      console.error(error);
+
+      showError(
+        error.message ||
+        "Gagal memuat anime."
+      );
+
+    }
+
+  }
+
+
+  /* =====================================
+     RENDER
+     ===================================== */
+
+  function renderAnime(media) {
+
+    document.title =
+      "Yorune — " +
+      (
+        media.title.english ||
+        media.title.romaji ||
+        "Anime"
+      );
+
+
+    document
+      .getElementById("loading")
+      .style.display =
+      "none";
+
+
+    document
+      .getElementById("animeContent")
+      .style.display =
+      "block";
+
+
+    const title =
+      media.title.english ||
+      media.title.romaji ||
+      "Unknown";
+
+
+    document
+      .getElementById("animeTitle")
+      .textContent =
+      title;
+
+
+    document
+      .getElementById("nativeTitle")
+      .textContent =
+      media.title.native ||
+      media.title.romaji ||
+      "";
+
+
+    const cover =
+      document
+        .getElementById("coverImage");
+
+
+    cover.src =
+      media.coverImage?.large ||
+      "";
+
+
+    cover.alt =
+      title;
+
+
+    const heroBg =
+      document
+        .getElementById("heroBg");
+
+
+    if (media.bannerImage) {
+
+      heroBg.style.backgroundImage =
+        `url("${media.bannerImage}")`;
+
+    }
+
+
+    renderMeta(media);
+
+    renderDescription(media);
+
+    renderGenres(media);
+
+    renderDetails(media);
+
+    renderEpisodes(media);
+
+    renderTrailer(media);
+
+  }
+
+
+  /* =====================================
+     META
+     ===================================== */
+
+  function renderMeta(media) {
+
+    const meta =
+      document.getElementById("meta");
+
+
+    meta.innerHTML = "";
+
+
+    const items = [];
+
+
+    if (media.averageScore) {
+
+      items.push(
+        `<span class="tag score">
+          ★ ${(media.averageScore / 10).toFixed(1)}
+        </span>`
+      );
+
+    }
+
+
+    if (media.status) {
+
+      items.push(
+        `<span class="tag">
+          ${escapeHTML(
+            formatStatus(media.status)
+          )}
+        </span>`
+      );
+
+    }
+
+
+    if (media.episodes) {
+
+      items.push(
+        `<span class="tag">
+          ${media.episodes} Episode
+        </span>`
+      );
+
+    }
+
+
+    if (media.duration) {
+
+      items.push(
+        `<span class="tag">
+          ${media.duration} Menit
+        </span>`
+      );
+
+    }
+
+
+    if (media.seasonYear) {
+
+      items.push(
+        `<span class="tag">
+          ${media.seasonYear}
+        </span>`
+      );
+
+    }
+
+
+    meta.innerHTML =
+      items.join("");
+
+  }
+
+
+  /* =====================================
+     DESCRIPTION
+     ===================================== */
+
+  function renderDescription(media) {
+
+    const description =
+      media.description ||
+      "Tidak ada sinopsis.";
+
+
+    document
+      .getElementById("description")
+      .textContent =
+      description;
+
+  }
+
+
+  /* =====================================
+     GENRES
+     ===================================== */
+
+  function renderGenres(media) {
+
+    const container =
+      document.getElementById("genres");
+
+
+    container.innerHTML = "";
+
+
+    if (
+      !media.genres ||
+      media.genres.length === 0
+    ) {
+
+      container.innerHTML =
+        `<span class="genre">
+          Tidak tersedia
+        </span>`;
+
+      return;
+
+    }
+
+
+    media.genres.forEach(genre => {
+
+      const element =
+        document.createElement("span");
+
+
+      element.className =
+        "genre";
+
+
+      element.textContent =
+        genre;
+
+
+      container.appendChild(
+        element
+      );
+
+    });
+
+  }
+
+
+  /* =====================================
+     DETAILS
+     ===================================== */
+
+  function renderDetails(media) {
+
+    const details =
+      document.getElementById("details");
+
+
+    const studio =
+      media.studios?.nodes
+        ?.map(item => item.name)
+        .join(", ") ||
+      "-";
+
+
+    const start =
+      formatDate(
+        media.startDate
+      );
+
+
+    const end =
+      formatDate(
+        media.endDate
+      );
+
+
+    details.innerHTML = `
+
+      <div class="detail">
+
+        <div class="detail-label">
+          Studio
+        </div>
+
+        <div class="detail-value">
+          ${escapeHTML(studio)}
+        </div>
+
+      </div>
+
+
+      <div class="detail">
+
+        <div class="detail-label">
+          Status
+        </div>
+
+        <div class="detail-value">
+          ${escapeHTML(
+            formatStatus(media.status)
+          )}
+        </div>
+
+      </div>
+
+
+      <div class="detail">
+
+        <div class="detail-label">
+          Mulai
+        </div>
+
+        <div class="detail-value">
+          ${escapeHTML(start)}
+        </div>
+
+      </div>
+
+
+      <div class="detail">
+
+        <div class="detail-label">
+          Selesai
+        </div>
+
+        <div class="detail-value">
+          ${escapeHTML(end)}
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* =====================================
+     EPISODE
+     ===================================== */
+
+  function renderEpisodes(media) {
+
+    const container =
+      document.getElementById(
+        "episodes"
+      );
+
+
+    container.innerHTML = "";
+
+
+    const total =
+      Number(media.episodes || 0);
+
+
+    if (!total) {
+
+      container.innerHTML = `
+        <div class="detail">
+          Episode tidak tersedia.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    for (
+      let episode = 1;
+      episode <= total;
+      episode++
+    ) {
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.className =
+        "episode";
+
+
+      button.type =
+        "button";
+
+
+      button.textContent =
+        episode;
+
+
+      button.onclick =
+        () => openEpisode(
+          media,
+          episode
+        );
+
+
+      container.appendChild(
+        button
+      );
+
+    }
+
+  }
+
+
+  /* =====================================
+     EPISODE PLAYER
+     ===================================== */
+
+  function openEpisode(
+    media,
+    episode
+  ) {
+
+    /*
+      Belum memasukkan provider video
+      di sini.
+
+      Nanti URL embed legal dapat
+      diarahkan ke watch.html.
+    */
+
+
+    const title =
+      media.title.english ||
+      media.title.romaji ||
+      "";
+
+
+    const url =
+      "watch.html?" +
+      "title=" +
+      encodeURIComponent(title) +
+      "&id=" +
+      encodeURIComponent(media.id) +
+      "&episode=" +
+      encodeURIComponent(episode);
+
+
+    window.location.href =
+      url;
+
+  }
+
+
+  /* =====================================
+     TRAILER
+     ===================================== */
+
+  function renderTrailer(media) {
+
+    const section =
+      document.getElementById(
+        "trailerSection"
+      );
+
+
+    const frame =
+      document.getElementById(
+        "trailerFrame"
+      );
+
+
+    if (
+      !media.trailer ||
+      media.trailer.site !== "youtube" ||
+      !media.trailer.id
+    ) {
+
+      section.style.display =
+        "none";
+
+      return;
+
+    }
+
+
+    frame.src =
+      "https://www.youtube.com/embed/" +
+      encodeURIComponent(
+        media.trailer.id
+      );
+
+
+    section.style.display =
+      "block";
+
+  }
+
+
+  /* =====================================
+     FORMAT STATUS
+     ===================================== */
+
+  function formatStatus(status) {
+
+    const map = {
+
+      FINISHED:
+        "Selesai",
+
+      RELEASING:
+        "Sedang Tayang",
+
+      NOT_YET_RELEASED:
+        "Belum Tayang",
+
+      CANCELLED:
+        "Dibatalkan",
+
+      HIATUS:
+        "Hiatus"
+
+    };
+
+
+    return map[status] ||
+      status ||
+      "-";
+
+  }
+
+
+  /* =====================================
+     FORMAT DATE
+     ===================================== */
+
+  function formatDate(date) {
+
+    if (
+      !date ||
+      !date.year
+    ) {
+
+      return "-";
+
+    }
+
+
+    const month =
+      date.month
+        ? String(
+            date.month
+          ).padStart(2, "0")
+        : "??";
+
+
+    const day =
+      date.day
+        ? String(
+            date.day
+          ).padStart(2, "0")
+        : "??";
+
+
+    return (
+      date.year +
+      "-" +
+      month +
+      "-" +
+      day
+    );
+
+  }
+
+
+  /* =====================================
+     ESCAPE HTML
+     ===================================== */
+
+  function escapeHTML(value) {
+
+    return String(value ?? "")
+      .replaceAll(
+        "&",
+        "&amp;"
+      )
+      .replaceAll(
+        "<",
+        "&lt;"
+      )
+      .replaceAll(
+        ">",
+        "&gt;"
+      )
+      .replaceAll(
+        '"',
+        "&quot;"
+      )
+      .replaceAll(
+        "'",
+        "&#039;"
+      );
+
+  }
+
+
+  /* =====================================
+     ERROR
+     ===================================== */
+
+  function showError(message) {
+
+    document
+      .getElementById("loading")
+      .style.display =
+      "none";
+
+
+    const error =
+      document.getElementById(
+        "error"
+      );
+
+
+    error.textContent =
+      message;
+
+
+    error.style.display =
+      "block";
+
+  }
+
+
+  /* =====================================
+     BACK
+     ===================================== */
+
+  function goBack() {
+
+    if (
+      window.history.length > 1
+    ) {
+
+      window.history.back();
+
+    } else {
+
+      window.location.href =
+        "index.html";
+
+    }
+
+  }
+
+
+  /* =====================================
+     START
+     ===================================== */
+
+  loadAnime();
+
+</script>
+
+</body>
+</html>
