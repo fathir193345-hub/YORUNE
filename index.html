@@ -508,7 +508,469 @@
       }
 
     }
-  </style></head><body><main class="main">  <!-- HOME -->  <section id="homePage" class="page active"><header class="header">
+    .profileHeader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 20px 24px;
+      text-align: center;
+    }
+
+    .avatarLarge {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      background: var(--surface2);
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      margin-bottom: 14px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .avatarEditBadge {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #18121f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      border: 2px solid var(--bg);
+    }
+
+    .usernameRow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .editUsernameBtn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 13px;
+      padding: 4px;
+    }
+
+    .editUsernameBtn:hover {
+      color: var(--accent);
+    }
+
+    .joinDate {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .statsGrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 0 16px;
+      margin-top: 4px;
+    }
+
+    .statCard {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 12px;
+      text-align: center;
+    }
+
+    .statValue {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .statLabel {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .profileMenu {
+      margin: 20px 16px 0;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .profileMenuItem {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .profileMenuItem:last-child {
+      border-bottom: none;
+    }
+
+    .profileMenuItem:active {
+      background: var(--surface2);
+    }
+
+    .profileMenuLeft {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .profileMenuArrow {
+      color: var(--muted);
+    }
+
+    .modalOverlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.6);
+      z-index: 100;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .modalOverlay.active {
+      display: flex;
+    }
+
+    .modalSheet {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px 20px 0 0;
+      width: 100%;
+      max-width: 480px;
+      padding: 22px 20px 28px;
+    }
+
+    .modalTitle {
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .modalInput {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 12px;
+      font: inherit;
+      outline: none;
+      margin-bottom: 14px;
+    }
+
+    .modalInput:focus {
+      border-color: var(--accent);
+    }
+
+    .avatarGrid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .avatarOption {
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--surface2);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .avatarOption.selected {
+      border-color: var(--accent);
+    }
+
+    .modalActions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .modalBtn {
+      flex: 1;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .modalBtnPrimary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #18121f;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+
+    .settingsGroup {
+      margin: 20px 16px 0;
+    }
+
+    .settingsGroupLabel {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin-bottom: 8px;
+      padding: 0 4px;
+    }
+
+    .settingsBox {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .settingsItem {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      gap: 12px;
+    }
+
+    .settingsItem:last-child {
+      border-bottom: none;
+    }
+
+    .settingsItem.clickable {
+      cursor: pointer;
+    }
+
+    .settingsItem.clickable:active {
+      background: var(--surface2);
+    }
+
+    .settingsItemText {
+      flex: 1;
+    }
+
+    .settingsItemTitle {
+      font-weight: 600;
+    }
+
+    .settingsItemDesc {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .settingsDanger {
+      color: #ff7b72;
+    }
+
+    .toggleSwitch {
+      position: relative;
+      width: 44px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+
+    .toggleSwitch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggleSlider {
+      position: absolute;
+      inset: 0;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .toggleSlider::before {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      left: 3px;
+      top: 3px;
+      background: var(--muted);
+      border-radius: 50%;
+      transition: .2s;
+    }
+
+    .toggleSwitch input:checked + .toggleSlider {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .toggleSwitch input:checked + .toggleSlider::before {
+      transform: translateX(18px);
+      background: #18121f;
+    }
+
+    .aboutBox {
+      margin: 20px 16px 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    /* LIGHT MODE */
+    body.light {
+      --bg: #f4f5f7;
+      --surface: #ffffff;
+      --surface2: #eceef2;
+      --border: #dde0e6;
+      --text: #14161a;
+      --muted: #6b7280;
+    }
+
+    .scheduleTabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 0 12px;
+      scrollbar-width: none;
+    }
+
+    .scheduleTabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .dayTab {
+      flex-shrink: 0;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .dayTab.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #18121f;
+    }
+
+    .dayTab.today::after {
+      content: "•";
+      margin-left: 4px;
+    }
+
+    .scheduleList {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .scheduleCard {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .scheduleCard:active {
+      background: var(--surface2);
+    }
+
+    .scheduleCard img {
+      width: 48px;
+      height: 68px;
+      object-fit: cover;
+      border-radius: 8px;
+      flex-shrink: 0;
+      background: var(--surface2);
+    }
+
+    .scheduleCardInfo {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .scheduleCardTitle {
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .scheduleCardMeta {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .scheduleCardTime {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .scheduleEmpty {
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+  </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script></head><body><main class="main">  <!-- HOME -->  <section id="homePage" class="page active"><header class="header">
 
   <div class="logo">
     Yorune<span>.</span>
@@ -570,6 +1032,32 @@
   </div>
 
   <div id="genreList" class="genreList"></div>
+
+</section>
+
+
+<!-- JADWAL TAYANG -->
+
+<section class="section">
+
+  <div class="sectionHeader">
+
+    <h2 class="sectionTitle">
+      Jadwal Tayang
+    </h2>
+
+  </div>
+
+  <div id="scheduleTabs" class="scheduleTabs"></div>
+
+  <div id="scheduleList" class="scheduleList"></div>
+
+  <div
+    id="scheduleEmpty"
+    class="scheduleEmpty"
+    style="display:none;">
+    Tidak ada anime tayang di hari ini.
+  </div>
 
 </section>
 
@@ -668,7 +1156,7 @@
     ← Kembali
   </button>
 
-  <div class="videoBox">
+  <div id="videoBox" class="videoBox">
 
     <div>
 
@@ -677,12 +1165,8 @@
       </div>
 
       <div>
-        Player Yorune
+        Memuat video...
       </div>
-
-      <small>
-        Video belum ditambahkan
-      </small>
 
     </div>
 
@@ -694,11 +1178,7 @@
     class="playerTitle">
   </h1>
 
-  <p class="playerNote">
-    Halaman player sudah disiapkan.
-    Nantinya video legal yang kamu miliki
-    bisa ditempatkan di sini.
-  </p>
+  <p id="playerNote" class="playerNote"></p>
 
 </div>
 
@@ -735,46 +1215,221 @@
     ← Kembali
   </button>
 
-  <div class="avatar">
-    👤
-  </div>
+  <div class="profileHeader">
 
-  <div class="profileName">
-    Guest
-  </div>
-
-  <div class="profileStatus">
-    Belum login
-  </div>
-
-
-  <div class="profileBox">
-
-    <div class="profileItem">
-
-      <span>
-        Nonton Nanti
-      </span>
-
-      <span id="savedCount">
-        0
-      </span>
-
+    <div class="avatarLarge" id="profileAvatar" onclick="openAvatarModal()">
+      👤
+      <div class="avatarEditBadge">✎</div>
     </div>
 
-
-    <div class="profileItem">
-
-      <span>
-        Status akun
-      </span>
-
-      <span>
+    <div class="usernameRow">
+      <div class="profileName" id="profileName">
         Guest
-      </span>
-
+      </div>
+      <button
+        class="editUsernameBtn"
+        id="editUsernameBtn"
+        onclick="openUsernameModal()"
+        style="display:none;">
+        ✎ Ubah
+      </button>
     </div>
 
+    <div class="profileStatus" id="profileStatus">
+      Belum login
+    </div>
+
+    <div class="joinDate" id="joinDate"></div>
+
+  </div>
+
+
+  <div class="statsGrid">
+
+    <div class="statCard">
+      <div class="statValue" id="savedCount">0</div>
+      <div class="statLabel">Nonton Nanti</div>
+    </div>
+
+    <div class="statCard">
+      <div class="statValue" id="profileAccountStatus">Guest</div>
+      <div class="statLabel">Status Akun</div>
+    </div>
+
+  </div>
+
+
+  <div class="profileMenu">
+
+    <div class="profileMenuItem" onclick="showSaved()">
+      <div class="profileMenuLeft">📺 Nonton Nanti</div>
+      <div class="profileMenuArrow">›</div>
+    </div>
+
+    <div class="profileMenuItem" onclick="openUsernameModal()">
+      <div class="profileMenuLeft">👤 Ubah Username</div>
+      <div class="profileMenuArrow">›</div>
+    </div>
+
+    <div class="profileMenuItem" onclick="openAvatarModal()">
+      <div class="profileMenuLeft">🖼️ Ubah Avatar</div>
+      <div class="profileMenuArrow">›</div>
+    </div>
+
+    <div class="profileMenuItem" onclick="openPage('settingsPage')">
+      <div class="profileMenuLeft">⚙️ Pengaturan</div>
+      <div class="profileMenuArrow">›</div>
+    </div>
+
+  </div>
+
+  <button
+    id="authButton"
+    class="saveLarge"
+    style="margin:20px 16px 0;width:calc(100% - 32px);text-align:center;"
+    onclick="handleAuthButton()">
+    Login / Daftar
+  </button>
+
+</div>
+
+
+<!-- MODAL: EDIT USERNAME -->
+<div class="modalOverlay" id="usernameModal">
+  <div class="modalSheet">
+    <div class="modalTitle">Ubah Username</div>
+    <input
+      class="modalInput"
+      id="usernameInput"
+      maxlength="24"
+      placeholder="Masukkan username baru">
+    <div class="modalActions">
+      <button class="modalBtn" onclick="closeModal('usernameModal')">Batal</button>
+      <button class="modalBtn modalBtnPrimary" onclick="saveUsername()">Simpan</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: EDIT AVATAR -->
+<div class="modalOverlay" id="avatarModal">
+  <div class="modalSheet">
+    <div class="modalTitle">Pilih Avatar</div>
+    <div class="avatarGrid" id="avatarGrid"></div>
+    <div class="modalActions">
+      <button class="modalBtn" onclick="closeModal('avatarModal')">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: CHANGE PASSWORD -->
+<div class="modalOverlay" id="passwordModal">
+  <div class="modalSheet">
+    <div class="modalTitle">Ganti Password</div>
+    <input
+      class="modalInput"
+      id="newPasswordInput"
+      type="password"
+      placeholder="Password baru (min. 6 karakter)">
+    <input
+      class="modalInput"
+      id="confirmPasswordInput"
+      type="password"
+      placeholder="Ulangi password baru">
+    <div class="modalActions">
+      <button class="modalBtn" onclick="closeModal('passwordModal')">Batal</button>
+      <button class="modalBtn modalBtnPrimary" onclick="savePassword()">Simpan</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+  </section>  <!-- SETTINGS -->  <section id="settingsPage" class="page"><div class="section" style="padding-top:25px;">
+
+  <button
+    class="backButton"
+    onclick="openPage('profilePage')">
+    ← Kembali
+  </button>
+
+  <div class="settingsGroup">
+    <div class="settingsGroupLabel">Tampilan</div>
+    <div class="settingsBox">
+
+      <div class="settingsItem">
+        <div class="settingsItemText">
+          <div class="settingsItemTitle">Mode Terang</div>
+          <div class="settingsItemDesc">Ganti tampilan jadi lebih terang</div>
+        </div>
+        <label class="toggleSwitch">
+          <input type="checkbox" id="lightModeToggle" onchange="toggleLightMode(this.checked)">
+          <span class="toggleSlider"></span>
+        </label>
+      </div>
+
+      <div class="settingsItem">
+        <div class="settingsItemText">
+          <div class="settingsItemTitle">Autoplay Video</div>
+          <div class="settingsItemDesc">Video langsung mulai saat episode dibuka</div>
+        </div>
+        <label class="toggleSwitch">
+          <input type="checkbox" id="autoplayToggle" onchange="toggleAutoplay(this.checked)">
+          <span class="toggleSlider"></span>
+        </label>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="settingsGroup">
+    <div class="settingsGroupLabel">Akun</div>
+    <div class="settingsBox">
+
+      <div class="settingsItem clickable" onclick="openUsernameModal()">
+        <div class="settingsItemText">
+          <div class="settingsItemTitle">Ubah Username</div>
+        </div>
+        <div class="settingsItemDesc">›</div>
+      </div>
+
+      <div class="settingsItem clickable" onclick="openAvatarModal()">
+        <div class="settingsItemText">
+          <div class="settingsItemTitle">Ubah Avatar</div>
+        </div>
+        <div class="settingsItemDesc">›</div>
+      </div>
+
+      <div class="settingsItem clickable" onclick="openPasswordModal()">
+        <div class="settingsItemText">
+          <div class="settingsItemTitle">Ganti Password</div>
+        </div>
+        <div class="settingsItemDesc">›</div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="settingsGroup">
+    <div class="settingsGroupLabel">Data</div>
+    <div class="settingsBox">
+
+      <div class="settingsItem clickable" onclick="clearLocalData()">
+        <div class="settingsItemText">
+          <div class="settingsItemTitle settingsDanger">Hapus Data Nonton Nanti</div>
+          <div class="settingsItemDesc">Data tersimpan di perangkat ini akan dihapus</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="aboutBox">
+    Yorune — v1.0<br>
+    Data anime disediakan oleh AniList API<br>
+    Dibuat dengan ❤️
   </div>
 
 </div>
@@ -830,6 +1485,578 @@ Profil
 /* =========================
    DATA (loaded dynamically from API)
 ========================= */
+
+
+/* =========================
+   SUPABASE
+========================= */
+
+const SUPABASE_URL = "https://tggpvzgoxcumxvjnweem.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_sarbxo2XsnvwztX3nA81iA_6dXF-X3n";
+
+const db =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+  );
+
+
+/* =========================
+   AUTH / PROFILE
+========================= */
+
+let currentSession = null;
+let currentProfile = null;
+
+const AVATAR_OPTIONS = [
+  "👤", "😺", "🦊", "🐼", "🐧", "🦉",
+  "🐺", "🦁", "🐸", "🐙", "👾", "🎃"
+];
+
+async function refreshProfile() {
+
+  const { data: { session } } =
+    await db.auth.getSession();
+
+  currentSession = session;
+
+  const nameEl =
+    document.getElementById("profileName");
+  const statusEl =
+    document.getElementById("profileStatus");
+  const accountStatusEl =
+    document.getElementById("profileAccountStatus");
+  const avatarEl =
+    document.getElementById("profileAvatar");
+  const authButton =
+    document.getElementById("authButton");
+  const editBtn =
+    document.getElementById("editUsernameBtn");
+  const joinDateEl =
+    document.getElementById("joinDate");
+
+  if (!session) {
+
+    nameEl.textContent = "Guest";
+    statusEl.textContent = "Belum login";
+    accountStatusEl.textContent = "Guest";
+    avatarEl.innerHTML = "👤";
+    joinDateEl.textContent = "";
+    editBtn.style.display = "none";
+
+    authButton.textContent = "Login / Daftar";
+    authButton.onclick = handleAuthButton;
+
+    return;
+
+  }
+
+  currentProfile =
+    await fetchOrCreateProfile(session.user);
+
+  const email = session.user.email;
+
+  nameEl.textContent =
+    currentProfile.username || email.split("@")[0];
+
+  statusEl.textContent = email;
+
+  accountStatusEl.textContent = "Aktif";
+
+  avatarEl.innerHTML =
+    currentProfile.avatar_emoji || "👤";
+
+  const joined = new Date(
+    session.user.created_at
+  );
+
+  joinDateEl.textContent =
+    "Bergabung sejak " +
+    joined.toLocaleDateString("id-ID", {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
+
+  editBtn.style.display =
+    "inline-block";
+
+  authButton.textContent = "Keluar";
+  authButton.onclick = handleLogout;
+
+}
+
+
+async function fetchOrCreateProfile(user) {
+
+  const { data, error } =
+    await db
+      .from("profiles")
+      .select("*")
+      .eq("id", user.id)
+      .maybeSingle();
+
+  if (error) {
+    console.error(error);
+    return { username: null, avatar_emoji: "👤" };
+  }
+
+  if (data) return data;
+
+  const { data: created, error: createError } =
+    await db
+      .from("profiles")
+      .insert({ id: user.id })
+      .select()
+      .single();
+
+  if (createError) {
+    console.error(createError);
+    return { username: null, avatar_emoji: "👤" };
+  }
+
+  return created;
+
+}
+
+
+function handleAuthButton() {
+  window.location.href = "login.html";
+}
+
+
+async function handleLogout() {
+
+  await db.auth.signOut();
+
+  await refreshProfile();
+
+  goHome();
+
+}
+
+
+db.auth.onAuthStateChange(() => {
+  refreshProfile();
+});
+
+
+/* =========================
+   PROFILE MODALS
+========================= */
+
+function openModal(id) {
+
+  if (!currentSession) {
+    showToast("Login dulu buat ubah profil");
+    return;
+  }
+
+  document.getElementById(id)
+    .classList.add("active");
+
+}
+
+function closeModal(id) {
+
+  document.getElementById(id)
+    .classList.remove("active");
+
+}
+
+function openUsernameModal() {
+
+  if (!currentSession) {
+    showToast("Login dulu buat ubah profil");
+    return;
+  }
+
+  document.getElementById("usernameInput").value =
+    currentProfile?.username || "";
+
+  openModal("usernameModal");
+
+}
+
+async function saveUsername() {
+
+  const value =
+    document.getElementById("usernameInput")
+      .value.trim();
+
+  if (!value) {
+    showToast("Username gak boleh kosong");
+    return;
+  }
+
+  const { error } =
+    await db
+      .from("profiles")
+      .update({ username: value })
+      .eq("id", currentSession.user.id);
+
+  if (error) {
+    console.error(error);
+    showToast("Gagal menyimpan username");
+    return;
+  }
+
+  currentProfile.username = value;
+
+  document.getElementById("profileName")
+    .textContent = value;
+
+  closeModal("usernameModal");
+
+  showToast("Username berhasil diubah");
+
+}
+
+function openAvatarModal() {
+
+  if (!currentSession) {
+    showToast("Login dulu buat ubah profil");
+    return;
+  }
+
+  const grid =
+    document.getElementById("avatarGrid");
+
+  grid.innerHTML = "";
+
+  AVATAR_OPTIONS.forEach(emoji => {
+
+    const option =
+      document.createElement("div");
+
+    option.className = "avatarOption";
+
+    if (currentProfile?.avatar_emoji === emoji) {
+      option.classList.add("selected");
+    }
+
+    option.textContent = emoji;
+
+    option.onclick = () =>
+      saveAvatar(emoji);
+
+    grid.appendChild(option);
+
+  });
+
+  openModal("avatarModal");
+
+}
+
+async function saveAvatar(emoji) {
+
+  const { error } =
+    await db
+      .from("profiles")
+      .update({ avatar_emoji: emoji })
+      .eq("id", currentSession.user.id);
+
+  if (error) {
+    console.error(error);
+    showToast("Gagal menyimpan avatar");
+    return;
+  }
+
+  currentProfile.avatar_emoji = emoji;
+
+  document.getElementById("profileAvatar")
+    .innerHTML = emoji;
+
+  closeModal("avatarModal");
+
+  showToast("Avatar berhasil diubah");
+
+}
+
+let toastTimeout = null;
+
+function showToast(message) {
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.textContent = message;
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimeout);
+
+  toastTimeout = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2200);
+
+}
+
+
+/* =========================
+   SETTINGS
+========================= */
+
+function applySavedSettings() {
+
+  const lightMode =
+    localStorage.getItem("yoruneLightMode") === "1";
+
+  document.body.classList.toggle(
+    "light",
+    lightMode
+  );
+
+  document.getElementById(
+    "lightModeToggle"
+  ).checked = lightMode;
+
+
+  const autoplay =
+    localStorage.getItem("yoruneAutoplay") === "1";
+
+  document.getElementById(
+    "autoplayToggle"
+  ).checked = autoplay;
+
+}
+
+function toggleLightMode(enabled) {
+
+  document.body.classList.toggle(
+    "light",
+    enabled
+  );
+
+  localStorage.setItem(
+    "yoruneLightMode",
+    enabled ? "1" : "0"
+  );
+
+}
+
+function toggleAutoplay(enabled) {
+
+  localStorage.setItem(
+    "yoruneAutoplay",
+    enabled ? "1" : "0"
+  );
+
+}
+
+function isAutoplayEnabled() {
+
+  return localStorage.getItem(
+    "yoruneAutoplay"
+  ) === "1";
+
+}
+
+function openPasswordModal() {
+
+  if (!currentSession) {
+    showToast("Login dulu buat ganti password");
+    return;
+  }
+
+  document.getElementById("newPasswordInput").value = "";
+  document.getElementById("confirmPasswordInput").value = "";
+
+  openModal("passwordModal");
+
+}
+
+async function savePassword() {
+
+  const newPassword =
+    document.getElementById("newPasswordInput").value;
+
+  const confirmPassword =
+    document.getElementById("confirmPasswordInput").value;
+
+  if (newPassword.length < 6) {
+    showToast("Password minimal 6 karakter");
+    return;
+  }
+
+  if (newPassword !== confirmPassword) {
+    showToast("Konfirmasi password tidak cocok");
+    return;
+  }
+
+  const { error } =
+    await db.auth.updateUser({
+      password: newPassword
+    });
+
+  if (error) {
+    console.error(error);
+    showToast("Gagal mengubah password");
+    return;
+  }
+
+  closeModal("passwordModal");
+
+  showToast("Password berhasil diubah");
+
+}
+
+function clearLocalData() {
+
+  const confirmed =
+    confirm("Hapus semua data Nonton Nanti di perangkat ini?");
+
+  if (!confirmed) return;
+
+  savedAnime = [];
+
+  saveData();
+
+  showToast("Data Nonton Nanti dihapus");
+
+}
+
+
+/* =========================
+   JADWAL TAYANG
+========================= */
+
+const DAYS_ID = [
+  "Minggu", "Senin", "Selasa", "Rabu",
+  "Kamis", "Jumat", "Sabtu"
+];
+
+let scheduleData = [];
+let selectedDay = DAYS_ID[new Date().getDay()];
+
+async function loadSchedule() {
+
+  const tabs =
+    document.getElementById("scheduleTabs");
+
+  tabs.innerHTML = "";
+
+  DAYS_ID.forEach(day => {
+
+    const tab =
+      document.createElement("button");
+
+    tab.className = "dayTab";
+
+    if (day === selectedDay) {
+      tab.classList.add("active");
+    }
+
+    if (day === DAYS_ID[new Date().getDay()]) {
+      tab.classList.add("today");
+    }
+
+    tab.textContent = day.slice(0, 3);
+
+    tab.onclick = () => {
+      selectedDay = day;
+      loadSchedule();
+    };
+
+    tabs.appendChild(tab);
+
+  });
+
+  try {
+
+    if (scheduleData.length === 0) {
+
+      const response =
+        await fetch("/api/schedule");
+
+      if (!response.ok) {
+        throw new Error("Gagal memuat jadwal");
+      }
+
+      scheduleData = await response.json();
+
+    }
+
+    renderSchedule();
+
+  } catch (error) {
+
+    console.error(error);
+
+    document.getElementById("scheduleList").innerHTML = "";
+
+    document.getElementById("scheduleEmpty").textContent =
+      "Gagal memuat jadwal tayang.";
+
+    document.getElementById("scheduleEmpty").style.display = "block";
+
+  }
+
+}
+
+function renderSchedule() {
+
+  const list =
+    document.getElementById("scheduleList");
+
+  const empty =
+    document.getElementById("scheduleEmpty");
+
+  const filtered =
+    scheduleData
+      .filter(item => item.weekday === selectedDay)
+      .sort((a, b) => a.airingAt - b.airingAt);
+
+  list.innerHTML = "";
+
+  if (filtered.length === 0) {
+
+    empty.textContent =
+      "Tidak ada anime tayang di hari ini.";
+
+    empty.style.display = "block";
+
+    return;
+
+  }
+
+  empty.style.display = "none";
+
+  filtered.forEach(item => {
+
+    animeCache[item.id] =
+      animeCache[item.id] || {
+        id: item.id,
+        title: item.title,
+        poster: item.poster
+      };
+
+    const card =
+      document.createElement("div");
+
+    card.className = "scheduleCard";
+
+    card.innerHTML = `
+
+      <img src="${item.poster}" alt="${item.title}" loading="lazy">
+
+      <div class="scheduleCardInfo">
+        <div class="scheduleCardTitle">${item.title}</div>
+        <div class="scheduleCardMeta">Episode ${item.episode}</div>
+      </div>
+
+      <div class="scheduleCardTime">${item.time} WIB</div>
+
+    `;
+
+    card.onclick = () =>
+      openDetail(item.id);
+
+    list.appendChild(card);
+
+  });
+
+}
 
 
 /* =========================
@@ -1266,7 +2493,7 @@ function renderEpisodes(anime) {
    PLAYER
 ========================= */
 
-function openPlayer(
+async function openPlayer(
   anime,
   episode
 ) {
@@ -1281,8 +2508,74 @@ function openPlayer(
   ).textContent =
     `${anime.title} — Episode ${episode}`;
 
+  document.getElementById(
+    "playerNote"
+  ).textContent = "";
+
+
+  const videoBox =
+    document.getElementById("videoBox");
+
+  videoBox.innerHTML = `
+    <div>
+      <div class="playIcon">▶</div>
+      <div>Memuat video...</div>
+    </div>
+  `;
+
 
   openPage("playerPage");
+
+
+  try {
+
+    const { data, error } =
+      await db
+        .from("episodes")
+        .select("youtube_id")
+        .eq("anime_id", anime.id)
+        .eq("episode_number", episode)
+        .maybeSingle();
+
+    if (error) throw error;
+
+    if (!data) {
+
+      videoBox.innerHTML = `
+        <div>
+          <div class="playIcon">▶</div>
+          <div>Video belum tersedia</div>
+          <small>Episode ini belum ditambahkan ke database.</small>
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    videoBox.innerHTML = `
+      <iframe
+        src="https://www.youtube.com/embed/${data.youtube_id}${isAutoplayEnabled() ? "?autoplay=1" : ""}"
+        style="width:100%;height:100%;border:0;border-radius:12px;"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    `;
+
+  } catch (error) {
+
+    console.error(error);
+
+    videoBox.innerHTML = `
+      <div>
+        <div class="playIcon">▶</div>
+        <div>Gagal memuat video</div>
+        <small>Coba lagi nanti.</small>
+      </div>
+    `;
+
+  }
 
 }
 
@@ -1678,8 +2971,14 @@ renderGenres();
 
 loadAnime();
 
+loadSchedule();
+
 updateSavedCount();
+
+refreshProfile();
+
+applySavedSettings();
 
 
 </script></body>
-</html>
+  </html>
