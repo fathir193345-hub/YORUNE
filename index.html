@@ -1281,6 +1281,11 @@
       <div class="profileMenuArrow">›</div>
     </div>
 
+    <div class="profileMenuItem" id="adminMenuItem" style="display:none;" onclick="window.location.href='admin.html'">
+      <div class="profileMenuLeft">🛠️ Panel Admin</div>
+      <div class="profileMenuArrow">›</div>
+    </div>
+
   </div>
 
   <button
@@ -1508,6 +1513,8 @@ const db =
 let currentSession = null;
 let currentProfile = null;
 
+const ADMIN_EMAIL = "fathir193345@gmail.com";
+
 const AVATAR_OPTIONS = [
   "👤", "😺", "🦊", "🐼", "🐧", "🦉",
   "🐺", "🦁", "🐸", "🐙", "👾", "🎃"
@@ -1534,6 +1541,8 @@ async function refreshProfile() {
     document.getElementById("editUsernameBtn");
   const joinDateEl =
     document.getElementById("joinDate");
+  const adminMenuItem =
+    document.getElementById("adminMenuItem");
 
   if (!session) {
 
@@ -1543,6 +1552,7 @@ async function refreshProfile() {
     avatarEl.innerHTML = "👤";
     joinDateEl.textContent = "";
     editBtn.style.display = "none";
+    adminMenuItem.style.display = "none";
 
     authButton.textContent = "Login / Daftar";
     authButton.onclick = handleAuthButton;
@@ -1550,6 +1560,11 @@ async function refreshProfile() {
     return;
 
   }
+
+  adminMenuItem.style.display =
+    session.user.email === ADMIN_EMAIL
+      ? "flex"
+      : "none";
 
   currentProfile =
     await fetchOrCreateProfile(session.user);
